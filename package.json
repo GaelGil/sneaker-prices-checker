@@ -44,6 +44,7 @@
     "sequelize": "^6.3.2",
     "sequelize-cli": "^6.2.0",
     "sequelize-paginate": "^1.1.6",
+    "sneaks-api": "^1.1.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
