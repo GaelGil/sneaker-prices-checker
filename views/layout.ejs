@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title><%= title %> - <%= process.env.APP_NAME %></title>
+    <link rel="stylesheet" href="/libraries/bootstrap/css/bootstrap.css" />
+    <script type="application/javascript" src="/libraries/jquery/jquery.min.js"></script>
+    <script type="application/javascript" src="/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <% if (locals.head) { %><%- head %><% } %>
+  </head>
+  <body>
+    <% if (flash.info || flash.error) { %>
+      <div style="position: absolute; top: 0; right: 0;">
+        <% if (flash.info) { %>
+        <div class="toast" role="main">
+          <div class="toast-body">
+            <%= flash.info.join(' '); %>
+          </div>
+        </div>
+        <% } %>
+        <% if (flash.error) { %>
+        <div class="toast" role="main">
+          <div class="toast-body">
+            <%= flash.error.join(' '); %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <script type="application/javascript">$('.toast').toast({delay: 2000}).toast('show');</script>
+    <% } %>
+    <%- body %>
+  </body>
+</html>
