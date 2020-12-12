@@ -20,6 +20,8 @@ router.use('/passwords', require('./passwords'));
 router.use('/register', require('./registrations'));
 router.use('/admin', require('./admin'));
 router.use('/api', require('./api'));
+router.use('/sneakers', require('./sneakers'));
+
 
 /// handle logging out the current user
 router.get('/logout', function(req,res,next){

@@ -1,0 +1,187 @@
+<%- contentFor('title') %>
+<%- contentFor('body') %>
+
+<style>
+    .container {
+        width: 500px;
+        height: 300px;
+        border: 1px solid blue;
+    }
+
+
+
+    body {
+  font: 12px sans-serif;
+}
+
+
+canvas{
+
+  width:1000px !important;
+  height:600px !important;
+
+}
+</style>
+
+<h1><%= snkr.sneakerName %> </h1>
+
+<div class="blog_section">
+    <% for (let sneaker of sneakers) { %>
+        <% if (snkr.styleID == sneaker.styleID) { %>
+            
+    <p class="releaseDate data" data="<%= sneaker.releaseDate %>"><%=  sneaker.releaseDate %></p>
+    <p class="name data" data="<%= sneaker.sneakerName %>"><%= sneaker.sneakerName %> </p>
+    <p class="colorway data" data="<%= sneaker.colorway %>"><%= sneaker.colorway %> </p>
+    <p class="price data" data="<%= sneaker.retailPrice %>"><%= sneaker.retailPrice %></p>
+    <p class="price data" data="<%= sneaker.stockXPrice %>"><%= sneaker.stockXPrice %></p>
+    <p class="price data" data="<%= sneaker.goatPrice %>"><%= sneaker.goatPrice %></p>
+    <p class="price data" data="<%= sneaker.stadiumGoodsPrice %>"><%= sneaker.stadiumGoodsPrice %></p>
+    <p class="price data" data="<%= sneaker.flightClubPrice %>"><%= sneaker.flightClubPrice %></p>
+    <p class="silhoutte data" data="<%= sneaker.silhoutte %>"><%= sneaker.silhoutte %></p>
+    <p class="styleID data" data="<%= sneaker.styleID %>"><%= sneaker.styleID %></p>
+    <p class="brand data" data="<%= sneaker.brand %>"><%= sneaker.brand %></p>
+    <p class="date data" data="<%= sneaker.createdAt %>"><%= sneaker.createdAt %></p>
+
+            <% } %>
+
+
+
+    <% } %>
+  </div>
+
+
+
+  <canvas id="barChart" width="200" height="200"></canvas>
+  <canvas id="lineChart" width="200" height="200"></canvas>
+
+
+  <script>
+// make data for price through time
+// - each line is a resseller
+
+// 
+
+    let dataByDay = [
+    {id: "id0", retail: "retail", price: priceData[0]},
+
+
+    ];
+
+    let dataClass = document.getElementsByClassName("data");
+    for (let i = 0; i < dataClass.length; i++) {
+            let date = dataClass.item.textContent;
+            let price = parseInt(paragraphs.item(i).textContent);
+            // all prices
+        }
+
+
+
+
+
+    let priceData = [];
+    let average = 0;
+    var paragraphs = document.getElementsByClassName("price");
+    for (let i = 0; i < paragraphs.length; i++) {
+        var paragraph = parseInt(paragraphs.item(i).textContent);
+        priceData.push(paragraph);
+        average += paragraph;
+    }
+
+    average = average/priceData.length;
+// The new data variable.
+const DATA = [
+  {id: "id0", place: "retail", price: priceData[0]},
+  {id: "id1", place: "stockx", price: priceData[1]},
+  {id: "id2", place: "goat", price: priceData[2]},
+  {id: "id3", place: "stadiumgoods", price: priceData[3]},
+  {id: "id4", place: "flightclub", price: priceData[4]},
+  {id: "id5", place: "average", price: average}
+];
+
+
+var ctx = document.getElementById('barChart');
+ctx.height = 500;
+ctx.width = 1000;
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [DATA[0]['place'], DATA[1]['place'], DATA[2]['place'], DATA[3]['place'], DATA[4]['place'], DATA[5]['place']],
+        datasets: [{
+            label: 'price',
+            data: [DATA[0]['price'], DATA[1]['price'], DATA[2]['price'], DATA[3]['price'], DATA[4]['price'], DATA[5]['price']],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: false,
+        // maintainAspectRatio: true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+var linectx = document.getElementById('lineChart');
+var stackedLine = new Chart(linectx, {
+    type: 'line',
+    data: {
+        labels: [DATA[0]['place'], DATA[1]['place'], DATA[2]['place'], DATA[3]['place'], DATA[4]['place'], DATA[5]['place']],
+        datasets: [{
+            label: 'price',
+            fill: false,
+            data: [DATA[0]['price'], DATA[1]['price'], DATA[2]['price'], DATA[3]['price'], DATA[4]['price'], DATA[5]['price']],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },    options: {
+
+        scales: {
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }
+});
+
+
+</script>
+
+
+
+
