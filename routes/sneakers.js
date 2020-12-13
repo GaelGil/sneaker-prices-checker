@@ -9,8 +9,8 @@ const models = require('../models');
 // View all sneakers
 // 
 router.get('/', function(req, res, next) {
-    models.Question.findAll().then(function(records){
-        res.render('snaekers/index', {
+    models.Sneakers.findAll().then(function(records){
+        res.render('sneakers/index', {
         records: records
         });
       });

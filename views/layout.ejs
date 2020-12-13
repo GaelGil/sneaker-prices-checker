@@ -7,11 +7,34 @@
     <meta name="author" content="">
     <title><%= title %> - <%= process.env.APP_NAME %></title>
     <link rel="stylesheet" href="/libraries/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/stylesheets/main.css"/>
     <script type="application/javascript" src="/libraries/jquery/jquery.min.js"></script>
     <script type="application/javascript" src="/libraries/bootstrap/js/bootstrap.bundle.min.js"></script>
     <% if (locals.head) { %><%- head %><% } %>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="/">POC</a>
+    
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/sneakers">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/business">Businesses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
     <% if (flash.info || flash.error) { %>
       <div style="position: absolute; top: 0; right: 0;">
         <% if (flash.info) { %>
