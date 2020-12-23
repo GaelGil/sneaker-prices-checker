@@ -23,9 +23,17 @@ canvas{
 }
 </style>
 
-<h1><%= snkr.sneakerName %> </h1>
+<div class="container">
+    <h1><%= snkr.sneakerName %> </h1>
+    <img style="width:100; height:200 "src="<%= snkr.imageUrl %>">
+    <canvas id="barChart" width="200" height="200"></canvas>
+    <canvas id="lineChart" width="200" height="200"></canvas>
+  
+</div>
 
-<div class="blog_section">
+
+<!-- for getting data -->
+<div style="display:none" class="blog_section">
     <% for (let sneaker of sneakers) { %>
         <% if (snkr.styleID == sneaker.styleID) { %>
             
@@ -48,7 +56,7 @@ canvas{
 
     <% } %>
   </div>
-
+<!-- end get data -->
 
 
   <canvas id="barChart" width="200" height="200"></canvas>
@@ -95,7 +103,6 @@ const DATA = [
   {id: "id4", place: "flightclub", price: priceData[4]},
   {id: "id5", place: "average", price: average}
 ];
-
 
 var ctx = document.getElementById('barChart');
 ctx.height = 500;

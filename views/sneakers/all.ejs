@@ -4,29 +4,23 @@
 
 <!-- display all shoes here -->
 
-<!-- <div class="blog_section">
-    <% for (let sneaker of sneakers) { %>
-    <p><%=  sneaker.releaseDate %></p>
-    <p> <%= sneaker.sneakerName %> </p>
-    <p> <%= sneaker.colorway %> </p>
-    <p> <%= sneaker.retailPrice %></p>
-    <p> <%= sneaker.stockXPrice %></p>
-    <p> <%= sneaker.goatPrice %></p>
-    <p> <%= sneaker.stadiumGoodsPrice %></p>
-    <p> <%= sneaker.flightClubPrice %></p>
-    <p> <%= sneaker.silhoutte %></p>
-    <p> <%= sneaker.styleID %></p>
-    <p> <%= sneaker.brand %></p>
-    <p> <%= sneaker.retailPrice %></p>
-    <p> <%= sneaker.createdAt %></p>
-    <a href="<%= sneaker.id %>">Click</a>
-    <br>
-    <br>
-    <br>
-
-
+<div class="container">
+  <% for (let sneaker of sneakers) { %>
+    <div class="card" style="width: 18rem;">
+      <img src="<%= sneaker.imageUrl %>" class="card-img-top" alt="sneakerImage">
+      <div class="card-body">
+        <h5 class="card-title"><%= sneaker.sneakerName %></h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="/sneakers/<%= sneaker.id %>/detail" class="btn btn-primary">More</a>
+      </div>
+    </div>
     <% } %>
-  </div> -->
+
+</div>
+
 
  
 
+
+
+ 
