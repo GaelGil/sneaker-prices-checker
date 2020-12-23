@@ -1,0 +1,11 @@
+<%- contentFor('title') %>
+<%- contentFor('body') %>
+<div class="blog_section">
+    <% for (let product of products) { %>
+    <p><%= product.lowestResellPrice %></p>
+    <p> <%= product.shoeName %> </p>
+    <p> <%= product.imageLinks %> </p>
+    <p> <%= product.resellLinks %></p>
+    <img width=300 height=250 src=" <%= product.thumbnail %> ">
+      <% } %>
+  </div>
