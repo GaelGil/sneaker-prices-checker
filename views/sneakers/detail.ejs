@@ -21,8 +21,8 @@
     <p class="price retail data" id="retail" data="<%= sneaker.retailPrice %>"><%= sneaker.retailPrice %></p>
     <p class="price stockx data" id="stockx" data="<%= sneaker.stockXPrice %>"><%= sneaker.stockXPrice %></p>
     <p class="price goat data" id="goat" data="<%= sneaker.goatPrice %>"><%= sneaker.goatPrice %></p>
-    <p class="price stadiumgoods data" id="stadium" data="<%= sneaker.stadiumGoodsPrice %>"><%= sneaker.stadiumGoodsPrice %></p>
-    <p class="price flightclub data" id="flight" data="<%= sneaker.flightClubPrice %>"><%= sneaker.flightClubPrice %></p>
+    <p class="price stadium data" id="stadium" data="<%= sneaker.stadiumGoodsPrice %>"><%= sneaker.stadiumGoodsPrice %></p>
+    <p class="price flight data" id="flight" data="<%= sneaker.flightClubPrice %>"><%= sneaker.flightClubPrice %></p>
     <p class="date data" id="date" data="<%= sneaker.createdAt %>"><%= sneaker.createdAt %></p>
 
             <% } %>
@@ -36,7 +36,7 @@
 
     let allData = []
 
-    // get data
+    // get all data into a list of dictionaries
     let dataClass = document.getElementsByTagName("p");
     for (let i = 0; i < dataClass.length; i++){
         let name = "";
@@ -102,117 +102,126 @@
         })
     }
 
-    let dataByDay = []
 
     let dataByReseller = []
 
     for (let i = 0; i <allData.length;i++){
 
-        let retail = "";
-        let retailPrice = 0;
+        let totalRetailPrice = 0;
 
-        let stockx = "";
-        let stockxPrice = 0;
+        var totalStockxPrice = 0;
+                
+        var totalGoatPrice = 0;
+
+        var totalStadiumPrice = 0;
+
+        var totalFlightPrice = 0;
+
+        var totalAveragePrice = 0;
         
-        let goat = "";
-        let goatPrice = 0;
-
-        let stadium = "";
-        let stadiumPrice = 0;
-
-        let flight = "";
-        let flightPrice = 0;
-
-        let average = "";
-        let averagePrice = 0;
+        totalStockxPrice = allData[i].stockx;
         
+        totalGoatPrice = allData[i].goat;
 
+        totalStadiumPrice = allData[i].stadium;
 
-        dataByDay.push({
-            "id": i,
-            "place": retail,
-            "price": retailPrice
-        })
+        totalFlightPrice = allData[i].flight;
 
-        dataByDay.push({
-            "id": i,
-            "place": stockx,
-            "price": stockxlPrice
-
-        })
-
-
-        dataByDay.push({
-            "id": i,
-            "place": goat,
-            "price": goatPrice
-        })
-
-
-        dataByDay.push({
-            "id": i,
-            "place": stadium,
-            "price": stadiumlPrice
-        })
-
-        dataByDay.push({
-            "id": i,
-            "place": flight,
-            "price": flightPrice
-        })
-
-
-        dataByDay.push({
-            "id": i,
-            "place": average,
-            "price": averagePrice
-        })
-
-
-
+        totalAveragePrice = allData[i].average;
     }
 
 
+    dataByReseller.push({
+            "id": 0,
+            "place": "retail",
+            "price": allData[0].retail,
+        })
+
+        dataByReseller.push({
+            "id": 1,
+            "place": "stockx",
+            "price": totalStockxPrice
+
+        })
 
 
-    let priceData = [];
-    let average = 0;
-    var paragraphs = document.getElementsByClassName("price");
-    for (let i = 0; i < paragraphs.length; i++) {
-        var paragraph = parseInt(paragraphs.item(i).textContent);
-        priceData.push(paragraph);
-        average += paragraph;
-    }
-
-    average = average/priceData.length;
-// The new data variable.
-const DATA = [
-  {id: "id0", place: "retail", price: priceData[0]},
-  {id: "id1", place: "stockx", price: priceData[1]},
-  {id: "id2", place: "goat", price: priceData[2]},
-  {id: "id3", place: "stadiumgoods", price: priceData[3]},
-  {id: "id4", place: "flightclub", price: priceData[4]},
-  {id: "id5", place: "average", price: average}
-];
+        dataByReseller.push({
+            "id": 2,
+            "place": "goat",
+            "price": totalGoatPrice
+        })
 
 
+        dataByReseller.push({
+            "id": 3,
+            "place": "stadium",
+            "price": totalStadiumPrice
+        })
+
+        dataByReseller.push({
+            "id": 4,
+            "place": "flight",
+            "price": totalFlightPrice
+        })
+
+
+        dataByReseller.push({
+            "id": 5,
+            "place": "average",
+            "price": totalAveragePrice
+        })
 
 
 
+// create labeles
+let barChartLabels = [];
+barChartLabels.push("retail");
+barChartLabels.push("goat");
+barChartLabels.push("stockx");
+barChartLabels.push("stadium");
+barChartLabels.push("flight");
+barChartLabels.push("average");
+
+// get char data
+let barChartData = [];
+for (let i = 0; i < dataByReseller.length; i++){
+    barChartData.push(dataByReseller[i].price);
+}
 
 
+let months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+
+
+let dataByDay = []
+console.log(allData[0].date)
+console.log(allData[1].date)
+console.log(allData[2].date)
+console.log(allData[3].date)
+console.log(allData[4].date)
+
+for (let i = 0; i < allData.length; i++){
+    allData[i]
+
+}
+
+
+// get words in string into lists of words
+// find words month 
+// create date ie month/day/year
+// create list with price and date
+//
 
 var ctx = document.getElementById('barChart');
-ctx.height = 500;
-ctx.width = 1000;
+ctx.height = 300;
+ctx.width = 300;
 
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [DATA[0]['place'], DATA[1]['place'], DATA[2]['place'], DATA[3]['place'], DATA[4]['place'], DATA[5]['place']],
+        labels: barChartLabels,
         datasets: [{
-            label: 'price',
-            data: [DATA[0]['price'], DATA[1]['price'], DATA[2]['price'], DATA[3]['price'], DATA[4]['price'], DATA[5]['price']],
+            label: 'price in US dollars',
+            data: barChartData,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -249,11 +258,11 @@ var linectx = document.getElementById('lineChart');
 var stackedLine = new Chart(linectx, {
     type: 'line',
     data: {
-        labels: [DATA[0]['place'], DATA[1]['place'], DATA[2]['place'], DATA[3]['place'], DATA[4]['place'], DATA[5]['place']],
+        labels: barChartLabels,
         datasets: [{
             label: 'price',
             fill: false,
-            data: [DATA[0]['price'], DATA[1]['price'], DATA[2]['price'], DATA[3]['price'], DATA[4]['price'], DATA[5]['price']],
+            data: barChartData,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
