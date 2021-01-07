@@ -5,26 +5,24 @@
 <div class="container">
     <h1><%= snkr.sneakerName %> </h1>
     <img style="width:18rem;" src="<%= snkr.imageUrl %>">
-    <canvas id="barChart" width="200" height="200"></canvas>
-    <canvas id="lineChart" width="200" height="200"></canvas>
-  
+    <canvas style="float:right;" id="barChart" width="200" height="200"></canvas>
+    <canvas style="float:right;" id="lineChart" width="200" height="200"></canvas>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>
 
 
 <!-- for getting data -->
-<div style="display:none" class="blog_section">
+<div class="blog_section">
     <% for (let sneaker of sneakers) { %>
         <% if (snkr.styleID == sneaker.styleID) { %>
-            
-    <p class="releaseDate data" id="releaseDate" data="<%= sneaker.releaseDate %>"><%= sneaker.releaseDate %></p>
-    <p class="name data" id="name" data="<%= sneaker.sneakerName %>"><%= sneaker.sneakerName %> </p>
-    <p class="price retail data" id="retail" data="<%= sneaker.retailPrice %>"><%= sneaker.retailPrice %></p>
-    <p class="price stockx data" id="stockx" data="<%= sneaker.stockXPrice %>"><%= sneaker.stockXPrice %></p>
-    <p class="price goat data" id="goat" data="<%= sneaker.goatPrice %>"><%= sneaker.goatPrice %></p>
-    <p class="price stadium data" id="stadium" data="<%= sneaker.stadiumGoodsPrice %>"><%= sneaker.stadiumGoodsPrice %></p>
-    <p class="price flight data" id="flight" data="<%= sneaker.flightClubPrice %>"><%= sneaker.flightClubPrice %></p>
-    <p class="date data" id="date" data="<%= sneaker.createdAt %>"><%= sneaker.createdAt %></p>
-
+          
+    <section>
+    <p style="display: none;" class="data"> <%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %>  </p>
+    </section>
             <% } %>
 
     <% } %>
@@ -35,63 +33,26 @@
   <script>
 
     let allData = []
+    
 
     // get all data into a list of dictionaries
-    let dataClass = document.getElementsByTagName("p");
-    for (let i = 0; i < dataClass.length; i++){
-        let name = "";
-        let releaseDate = "";
-        let retail = 0;
-        let stockx = 0;
-        let stadium = 0;
-        let flight = 0;
-        let date = 0;
-        let avg = 0;
+    let dataParagraphs = document.querySelectorAll(".data");
+    for (let i =0; i < dataParagraphs.length; i++){
+        let data = dataParagraphs[i].textContent;
+        console.log(data);
+        let dataList = data.split(" ");
+        // console.log(dataList)
+        let date = dataList[7] + " " + dataList[8] + " " + dataList[9] + " " + dataList[10]
+        let retail = parseInt(dataList[2]);
+        let stockx = parseInt(dataList[3]);
+        let goat = parseInt(dataList[4]);
+        let stadium = parseInt(dataList[5]);
+        let flight = parseInt(dataList[6]);
 
-        if ($('p').hasClass("name")){
-            name = $('#name').first().text();
-        }
-        
+        let avg = (stockx+goat+goat+stadium+flight)/4
 
-        if ($('p').hasClass("releaseDate")){
-            releaseDate = $('#releaseDate').first().text();
-        }
-        
-
-        // all the prices
-        if ($('p').hasClass("retail")){
-            retail =  parseInt($('#retail').first().text());
-        }
-
-
-        if ($('p').hasClass("stockx")){
-            stockx =  parseInt($('#stockx').first().text());
-        }
-
-
-        if ($('p').hasClass("goat")){
-            goat =  parseInt($('#goat').first().text());
-        }
-
-
-        if ($('p').hasClass("stadium")){
-            stadium =  parseInt($('#stadium').first().text());
-        }
-
-        if ($('p').hasClass("flight")){
-           flight =  parseInt($('#flight').first().text());
-        }
-
-        // the date
-        if ($('p').hasClass("date")){
-           date = $('#date').first().text();
-        }
-
-        avg = (stockx+goat+stadium+flight)/4;
-        
         allData.push({
-            "releaseDate": releaseDate,
-            "name": name,
+            "releaseDate": dataList[1],
             "retail": retail,
             "stockx": stockx,
             "goat": goat,
@@ -100,7 +61,154 @@
             "date": date,
             "average": avg,
         })
+
     }
+
+    // let dataSection = document.getElementsByTagName("section");
+    // for (let i = 0; i < dataSection.length; i++){
+    //     let name = "";
+    //     let releaseDate = "";
+    //     let retail = 0;
+    //     let stockx = 0;
+    //     let stadium = 0;
+    //     let flight = 0;
+    //     let date = 0;
+    //     let avg = 0;
+    //     let dataParagraphs = document.getElementsByTagName("section")
+    //     for (let j =0; j< dataParagraphs.length;j++){
+        
+    //         console.log(j);
+        
+    //     // console.log()
+    //     if ($('p').hasClass("name")){
+    //         name = $('#name').first().text();
+    //         console.log(name)
+    //     }
+        
+
+    //     if ($('.data p').hasClass("releaseDate")){
+    //         releaseDate = $('#releaseDate').first().text();
+    //     }
+        
+
+    //     // all the prices
+    //     if ($('.data p').hasClass("retail")){
+    //         retail =  parseInt($('#retail').first().text());
+    //     }
+
+
+    //     if ($('.data p').hasClass("stockx")){
+    //         stockx =  parseInt($('#stockx').first().text());
+    //     }
+
+
+    //     if ($('.data p').hasClass("goat")){
+    //         goat =  parseInt($('#goat').first().text());
+    //     }
+
+
+    //     if ($('.data p').hasClass("stadium")){
+    //         stadium =  parseInt($('#stadium').first().text());
+    //     }
+
+    //     if ($('.data p').hasClass("flight")){
+    //        flight =  parseInt($('#flight').first().text());
+    //     }
+
+    //     // the date
+    //     if ($('.data p').hasClass("date")){
+    //        date = $('#date').first().text();
+    //     }
+
+    //     avg = (stockx+goat+stadium+flight)/4; 
+    //     }
+
+
+    //     allData.push({
+    //         "releaseDate": releaseDate,
+    //         "name": name,
+    //         "retail": retail,
+    //         "stockx": stockx,
+    //         "goat": goat,
+    //         "stadium": stadium,
+    //         "flight": flight,
+    //         "date": date,
+    //         "average": avg,
+    //     })
+
+    // }
+
+// console.log(allData)
+
+
+    // let dataClass = document.getElementsByTagName("section");
+    // console.log(dataClass.length)
+    // for (let i = 0; i < dataClass.length; i++){
+    //     let name = "";
+    //     let releaseDate = "";
+    //     let retail = 0;
+    //     let stockx = 0;
+    //     let stadium = 0;
+    //     let flight = 0;
+    //     let date = 0;
+    //     let avg = 0;
+
+    //     if ($('p').hasClass("name")){
+    //         name = $('#name').first().text();
+    //     }
+        
+
+    //     if ($('p').hasClass("releaseDate")){
+    //         releaseDate = $('#releaseDate').first().text();
+    //     }
+        
+
+    //     // all the prices
+    //     if ($('p').hasClass("retail")){
+    //         retail =  parseInt($('#retail').first().text());
+    //     }
+
+
+    //     if ($('p').hasClass("stockx")){
+    //         stockx =  parseInt($('#stockx').first().text());
+    //     }
+
+
+    //     if ($('p').hasClass("goat")){
+    //         goat =  parseInt($('#goat').first().text());
+    //     }
+
+
+    //     if ($('p').hasClass("stadium")){
+    //         stadium =  parseInt($('#stadium').first().text());
+    //     }
+
+    //     if ($('p').hasClass("flight")){
+    //        flight =  parseInt($('#flight').first().text());
+    //     }
+
+    //     // the date
+    //     if ($('p').hasClass("date")){
+    //        date = $('#date').first().text();
+    //     }
+
+    //     avg = (stockx+goat+stadium+flight)/4;
+        
+    //     console.log(date)
+    //     allData.push({
+    //         "releaseDate": releaseDate,
+    //         "name": name,
+    //         "retail": retail,
+    //         "stockx": stockx,
+    //         "goat": goat,
+    //         "stadium": stadium,
+    //         "flight": flight,
+    //         "date": date,
+    //         "average": avg,
+    //     })
+    // }
+
+// console.log(allData)
 
 
     let dataByReseller = []
@@ -188,23 +296,66 @@ for (let i = 0; i < dataByReseller.length; i++){
     barChartData.push(dataByReseller[i].price);
 }
 
+// console.log(allData)
 
-let months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-
+let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+let years = ['2020', '2021']
 
 let dataByDay = []
-console.log(allData[0].date)
-console.log(allData[1].date)
-console.log(allData[2].date)
-console.log(allData[3].date)
-console.log(allData[4].date)
+// console.log(allData[0].date)
+// console.log(allData[1].date)
+// console.log(allData[2].date)
+// console.log(allData[3].date)
+// console.log(allData[4].date)
+// console.log(allData[5].date)
+// console.log(allData[6].date)
+// console.log(allData[7].date)
+// console.log(allData[8].date)
+// console.log(allData[allData.length-1].date)
 
 for (let i = 0; i < allData.length; i++){
-    allData[i]
+    let date = allData[i].date;
+    let dateWords = date.split(" ");
+    let newDate = "";
+    let year = 0;
+    let month = 0;
+    let day = dateWords[2];
+    for (let j =0; j < months.length; j++){
+        if (dateWords.includes(months[j])){
+            month = j+1;
+            // console.log(j)
+            if (dateWords.includes(years[0])){
+                year = years[0];
+            }else{
+                year = years[1];
+            }
+
+        }
+    }
+
+    newDate = month + "/" + day + "/" + year
+    
+    dataByDay.push({
+            "date": newDate,
+            "retail": allData[i].retail,
+            "stockx": allData[i].stockx,
+            "goat": allData[i].goat,
+            "stadium": allData[i].stadium,
+            "flight": allData[i].flight,
+            "average": allData[i].average,
+        })
 
 }
 
+// console.log(dataByDay);
 
+
+let lineCharDates = []
+let lineCharData = []
+for (let i = 0; i < dataByDay.length; i++){
+    lineCharDates.push(dataByDay[i].date);
+    lineCharData.push(dataByDay[i].average);
+}
 // get words in string into lists of words
 // find words month 
 // create date ie month/day/year
@@ -255,14 +406,16 @@ var myChart = new Chart(ctx, {
 });
 
 var linectx = document.getElementById('lineChart');
+linectx.height = 300;
+linectx.width = 300;
 var stackedLine = new Chart(linectx, {
     type: 'line',
     data: {
-        labels: barChartLabels,
+        labels: lineCharDates,
         datasets: [{
             label: 'price',
             fill: false,
-            data: barChartData,
+            data: lineCharData,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -281,11 +434,15 @@ var stackedLine = new Chart(linectx, {
             ],
             borderWidth: 1
         }]
-    },    options: {
-
+    },
+    options: {
+        responsive: false,
+        // maintainAspectRatio: true,
         scales: {
             yAxes: [{
-                stacked: true
+                ticks: {
+                    beginAtZero: true
+                }
             }]
         }
     }
