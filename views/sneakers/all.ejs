@@ -4,24 +4,29 @@
 
 <!-- display all shoes here -->
 
-<div class="container">
+
+<div id="contentBox" style="margin:0px auto; width:70%">
   <% for (let sneaker of sneakers) { %>
-    <div class="card" style="width: 18rem;">
-      <img src="<%= sneaker.imageUrl %>" class="card-img-top" alt="sneakerImage">
-      <div class="card-body">
-        <h5 class="card-title"><%= sneaker.sneakerName %></h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="/sneakers/<%= sneaker.id %>/detail" class="btn btn-primary">More</a>
+
+     <div id="column1" style="float:left; margin:0; width:33%;">
+      <div class="card" style="width: 18rem;">
+        <img src="<%= sneaker.imageUrl %>" class="card-img-top" alt="sneakerImage">
+        <div class="card-body">
+          <h5 class="card-title"><%= sneaker.sneakerName %></h5>
+          <a href="/sneakers/<%= sneaker.id %>/detail" class="btn btn-primary">More</a>
+        </div>
       </div>
+      <br>
+      <br>
     </div>
-    <br>
-    <% } %>
+     <% } %>
 
-</div>
 
+ </div>
 
  
 
+<!-- <script type="text/javascript" src="/scripts/removeDuplicates"></script> -->
 
 
  

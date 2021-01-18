@@ -25,6 +25,7 @@ let flightLineChartData = []
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const YEARS = ['2020', '2021'];
+let seenDates = []
 
 
 function getAllData(){
@@ -42,7 +43,8 @@ function getAllData(){
         let stadium = parseInt(dataList[5]);
         let flight = parseInt(dataList[6]);
         // get the average of the prices (not including retail price)
-        let avg = (stockx+goat+goat+stadium+flight)/4
+        let avg = (stockx+goat+stadium+flight)/4
+
 
         // get the date 
         let year = 0;
@@ -61,9 +63,15 @@ function getAllData(){
             }
         }
 
+        let num = 0;
         let date = month + "/" + day + "/" + year
-        
 
+        // check if we have a duplicate date
+        if (seenDates.includes(date)){
+            num +=1;
+        }else{
+        // add a never seen date
+        seenDates.push(date);
         // add dictionary of data to list
         allData.push({
             "releaseDate": dataList[1],
@@ -75,8 +83,12 @@ function getAllData(){
             "date": date,
             "average": avg,
         })
+        }
+
+
 
     }
+
     return 0;
 }
 
@@ -171,7 +183,7 @@ function drawBarChart(){
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(255, 192, 203, 0.2)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
@@ -179,7 +191,7 @@ function drawBarChart(){
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(255, 192, 203, 1)'
                 ],
                 borderWidth: 1
             }]
@@ -209,13 +221,46 @@ function drwaLineChart(){
         data: {
             labels: averageLineChartLabels,
             datasets: [{
-                label: 'price',
+                label: 'Average',
                 fill: false,
                 data: averageLineChartData,
+                backgroundColor: 'rgba(255, 192, 203)',
+                borderColor: 'rgba(255, 192, 203)',
+                borderWidth: 1
+            },
+            {
+                label: 'StockX',
+                fill: false,
+                data: stockxLineChartData,
+                backgroundColor:'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 0.2)',
+                borderWidth: 1
+            },
+            {
+                label: 'Goat',
+                fill: false,
+                data: goatLineChartData,
                 backgroundColor: 'rgba(255, 99, 132, 1)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
-            }]
+            },
+            {
+                label: 'Stadium Goods',
+                fill: false,
+                data: stadiumLineChartData,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 0.2)',
+                borderWidth: 1
+            },
+            {
+                label: 'FlightCLub',
+                fill: false,
+                data: flightLineChartData,
+                backgroundColor: 'rgba(153, 102, 255, 1)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            },
+        ]
         },
         options: {
             responsive: false,
@@ -251,10 +296,21 @@ function getLabelsAndData(){
     for (let i = 0; i < allData.length; i++){
         averageLineChartLabels.push(allData[i].date);
         averageLineChartData.push(allData[i].average);
+
+        stockxLineChartLabels.push(allData[i].date);
+        stockxLineChartData.push(allData[i].stockx);
+
+        goatLineChartLabels.push(allData[i].date);
+        goatLineChartData.push(allData[i].goat);
+
+        stadiumLineChartLabels.push(allData[i].date);
+        stadiumLineChartData.push(allData[i].stadium);
+
+        flightineChartLabels.push(allData[i].date);
+        flightLineChartData.push(allData[i].flight);
     }
 
 }
-
 
 getAllData();
 getDataByReSeller();

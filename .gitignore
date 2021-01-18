@@ -5,5 +5,5 @@ dist
 node_modules
 config
 webpack-stats.json
-gcloudignore
+.gcloudignore
 app.yaml
