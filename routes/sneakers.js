@@ -32,6 +32,17 @@ router.get('/:id/detail', function(req, res){
   
 
 
+//Grabs all sneakers from the Sneakers database
+router.get('/vis', function(req, res){
+  models.Sneakers.findAll().then(function(sneakers){
+    res.render('sneakers/visuals', {
+    sneakers: sneakers
+    });
+  });
+});
+
+
+
 
     // router.get('/vis', function(req, res){
     //     // models.Sneakers.findAll().then(function(sneakers){

@@ -1,0 +1,46 @@
+<%- contentFor('title') %>
+<%- contentFor('body') %>
+
+
+
+<header class="masthead text-white text-center" style="background-color:lightgray;">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">A Look At All the Data</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- display top 5 most expensive shoes at the momment -->
+  <!-- most expensive shoes by color -->
+  <!--  -->
+<div class="container">
+    <canvas style="float:right;" id="brandPricesChart" width="200" height="200"></canvas>
+    <canvas style="float:right;" id="brandPriceOverTime" width="200" height="200"></canvas>
+    <canvas style="float:right;" id="dataBasePieChart" width="200" height="200"></canvas>
+    <canvas style="float:right;" id="brandPriceOverTime" width="200" height="200"></canvas>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+
+
+ <div class="blog_section">
+    <% for (let sneaker of sneakers) { %>
+          
+    <section>
+    <p style="display: none;" class="data"><%= sneaker.colorway %> <%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %> <%= sneaker.sneakerName %></p>
+    </section>
+
+    <% } %>
+  </div>
+ 
+
+<script type="text/javascript" src="/scripts/removeDuplicates.js"></script>
