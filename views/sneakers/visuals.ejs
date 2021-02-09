@@ -2,7 +2,7 @@
 <%- contentFor('body') %>
 
 
-
+<!-- header -->
 <header class="masthead text-white text-center" style="background-color:lightgray;">
     <div class="overlay"></div>
     <div class="container">
@@ -16,9 +16,8 @@
     </div>
   </header>
 
-  <!-- display top 5 most expensive shoes at the momment -->
   <!-- most expensive shoes by color -->
-  <!--  -->
+  <!-- grpah visuals -->
 <div class="container">
     <canvas style="float:right;" id="brandPricesChart" width="200" height="200"></canvas>
     <canvas style="float:right;" id="brandPriceOverTime" width="200" height="200"></canvas>
@@ -31,12 +30,79 @@
   <br>
 </div>
 
+<br>
+
+<!-- most expensive -->
+<section class="testimonials text-center">
+  <div class="container">
+    <h2 class="mb-5">Cheapest Today</h2>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-1.jpg" alt="">
+          <h5 id="expensiveOne">Margaret E.</h5>
+          <p class="font-weight-light mb-0">Has successfully threw away 1000 disposable items properly</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-2.jpg" alt="">
+          <h5 id="expensiveTwo">Fred S.</h5>
+          <p class="font-weight-light mb-0">Has successfully threw away 920 disposable items properly</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-3.jpg" alt="">
+          <h5 id="expensiveThree">Sarah W.</h5>
+          <p class="font-weight-light mb-0">Has successfully threw away 870 disposable items properly</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<br>
+
+<!-- cheapest -->
+<section class="testimonials text-center">
+  <div class="container">
+    <h2 class="mb-5">Cheapest Today</h2>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-1.jpg" alt="">
+          <h5 id="cheapOne">Margaret E.</h5>
+          <p class="font-weight-light mb-0">Has successfully threw away 1000 disposable items properly</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-2.jpg" alt="">
+          <h5 id="expensiveTwo">Fred S.</h5>
+          <p class="font-weight-light mb-0">Has successfully threw away 920 disposable items properly</p>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-3.jpg" alt="">
+          <h5 id="expensiveThree">Sarah W.</h5>
+          <p class="font-weight-light mb-0">Has successfully threw away 870 disposable items properly</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+
 
  <div class="blog_section">
     <% for (let sneaker of sneakers) { %>
           
     <section>
-    <p style="display: none;" class="data"><%= sneaker.colorway %> <%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %> <%= sneaker.sneakerName %></p>
+    <p style="display: none;" class="data"><%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %> <%= sneaker.sneakerName %></p>
     </section>
 
     <% } %>

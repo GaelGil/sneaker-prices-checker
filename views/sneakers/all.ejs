@@ -4,17 +4,38 @@
 
 <!-- display all shoes here -->
 
+
+<style>
+
+
+
+.card {
+  background-color: #1A1A1B; 
+  border: 3px solid #474748;
+  color: white; 
+  margin: 10px;
+  width: 18rem;
+}
+
+.card a {
+  background-color: #1A1A1B;
+  border: 2px solid #474748;
+}
+
+</style>
+
+
 <br>
 <br>
 <div id="contentBox" style="margin:0px auto; width:70%">
   <% for (let sneaker of sneakers) { %>
 
      <div id="column1" style="float:left; margin:0; width:33%;">
-      <div style="background-color: #1A1A1B; border: 3px solid #474748; color: white; margin: 10px" class="card" style="width: 18rem;">
+      <div class="card">
         <img src="<%= sneaker.imageUrl %>" class="card-img-top" alt="sneakerImage">
         <div class="card-body">
           <h5 class="card-title"><%= sneaker.sneakerName %></h5>
-          <a style="background-color: #1A1A1B; border: 2px solid #474748;" href="/sneakers/<%= sneaker.id %>/detail" class="btn btn-dark">More</a>
+          <a href="/sneakers/<%= sneaker.id %>/detail" class="btn btn-dark">More</a>
         </div>
       </div>
       <br>

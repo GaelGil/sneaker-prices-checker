@@ -1,6 +1,6 @@
 
  body {
-    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: black;
   }
   
@@ -10,8 +10,15 @@
   h4,
   h5,
   h6 {
-    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 700;
+    color: white;
+  }
+
+  p{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: normal;
+    color: white;
   }
   
   header.masthead {
@@ -91,4 +98,10 @@
   footer.footer {
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+
+  nav {
+    background-color: #1A1A1B; 
+    border-bottom: 5px solid #474748;
   }

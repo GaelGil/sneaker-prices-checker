@@ -240,8 +240,8 @@ function drwaLineChart(){
                 label: 'Goat',
                 fill: false,
                 data: goatLineChartData,
-                backgroundColor: 'rgba(255, 99, 132, 1)',
-                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 0.2)',
                 borderWidth: 1
             },
             {
@@ -289,6 +289,7 @@ function getLabelsAndData(){
 
     // get barchartData
     for (let i = 0; i < dataByReseller.length; i++){
+        // if price is nan 
         barChartData.push(dataByReseller[i].price);
     }
 
@@ -311,6 +312,14 @@ function getLabelsAndData(){
     }
 
 }
+
+// this has goat and stockx mixed up
+// console.log(barChartData);
+
+// this 
+// console.log(dataByReseller)
+
+
 
 getAllData();
 getDataByReSeller();
