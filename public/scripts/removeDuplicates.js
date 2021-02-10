@@ -30,8 +30,7 @@ function getAllUniqueData(){
         let flight = parseInt(dataList[5]);
 
 
-        // get the average of the prices (not including retail price)
-        let avg = (stockx+goat+stadium+flight)/4
+
 
         // get the date 
         let year = 0;
@@ -56,6 +55,21 @@ function getAllUniqueData(){
         if (seenDataLists.includes(data)){
             num +=1;
         }else{
+        if (isNaN(stockx)){
+            stockx = 0;
+        }
+        else if (isNaN(goat)){
+            goat = 0;
+        }
+        else if (isNaN(flight)){
+            flight = 0;
+        }
+        else if (isNaN(stadium)){
+            stadium = 0;
+        }
+
+        // get the average of the prices (not including retail price)
+        let avg = (stockx+goat+stadium+flight)/4
 
         // add a never seen date
         seenDataLists.push(data);
@@ -81,27 +95,16 @@ function getAllUniqueData(){
 }
 
 
-function adjustDate(mm, dd, yyyy){
+function compareAndGetDate(){
 
-    let today = mm + '/' + dd + '/' + yyyy;
-
-    console.log(today)
-    if (!uniqueDates.includes(today)){
-        if (dd > 1){
-            if (dd < 10){
-                dd = '0' + (dd-1);
-                adjustDate(mm, dd, yyyy)
-            }
-        }
-        else{
-            adjustDate(mm-1, 31, yyyy)
-        }
-    }
+    uniqueDates.sort(function(a,b) { 
+        return new Date(a.start).getTime() - new Date(b.start).getTime() 
+    });
 
 
+    let date = uniqueDates[uniqueDates.length-1];
 
-
-    return today;
+    return date;
 }
 
 
@@ -111,47 +114,37 @@ function getTopBottomThree(today){
     // get all the sneakers that were scraped last
     for (let i =0; i < uniqueData.length; i++){
         let sneakerDate = uniqueData[i].date; 
-        // console.log(sneakerDate + " " + today)       
         if (sneakerDate === today){
             todaysSneakers.push(uniqueData[i]);
         }
     }
 
-    console.log(today + "here");
 
     // used to find highest and lowest prices
     let maxPrice = todaysSneakers[0].average;
     let minPrice = todaysSneakers[0].average;
 
+    // console.log(todaysSneakers[0])
+
     for (let i = 0; i < todaysSneakers.length; i++){
         // get lowest and highest sneaker price 
         let sneakerPrice = todaysSneakers[i].average; // get sneaker price
-        
+        // console.log(sneakerPrice + " " + maxPrice)
         if (sneakerPrice > maxPrice){
-            topThreeExpensive.push(todaysSneakers[i]);
+            maxPrice = todaysSneakers[i]
         }
-        else if (sneakerPrice < minPrice){
-            topThreeCheapest.push(todaysSneakers[i]);
+
+        if (sneakerPrice < minPrice){
+            minPrice = todaysSneakers[i]
         }
     }
 
-
+    console.log(maxPrice);
+    console.log(minPrice);
     return 0; 
 }
 
 
-function getDateHelper(){
-    // get todays date
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, '0');
-    let mm = String(today.getMonth() + 1); 
-    let yyyy = today.getFullYear();
-
-
-    let date = adjustDate(mm, dd, yyyy);
-
-    return date;
-}
 
 
 
@@ -159,13 +152,8 @@ function getDateHelper(){
 
 
 getAllUniqueData();
-let date = getDateHelper();
+let date = compareAndGetDate();
 getTopBottomThree(date);
-// console.log(uniqueData)
-// getTopBottomThree();
-
-
-
 
 /**
  * This functions selects the top 3 most expensive and bottom 3 cheapest
