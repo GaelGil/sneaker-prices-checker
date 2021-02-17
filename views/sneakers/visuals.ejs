@@ -39,21 +39,21 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-1.jpg" alt="">
-          <h5 id="expensiveOne">Margaret E.</h5>
-          <p class="font-weight-light mb-0">Has successfully threw away 1000 disposable items properly</p>
+          <img id="expensiveOneImg" class="img-fluid mb-3" src="#" alt="">
+          <h5 id="expensiveOneName">Margaret E.</h5>
+          <p id="expensiveOnePrice" class="font-weight-light mb-0">Has successfully threw away 1000 disposable items properly</p>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-2.jpg" alt="">
-          <h5 id="expensiveTwo">Fred S.</h5>
-          <p class="font-weight-light mb-0">Has successfully threw away 920 disposable items properly</p>
+          <img class="img-fluid mb-3" src="#" alt="">
+          <h5 id="expensiveTwoName">Fred S.</h5>
+          <p id="expensiveTwoPrice" class="font-weight-light mb-0">Has successfully threw away 920 disposable items properly</p>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-3.jpg" alt="">
+          <img class="img-fluid mb-3" src="#" alt="">
           <h5 id="expensiveThree">Sarah W.</h5>
           <p class="font-weight-light mb-0">Has successfully threw away 870 disposable items properly</p>
         </div>
@@ -72,14 +72,14 @@
     <div class="row">
       <div class="col-lg-4">
         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-1.jpg" alt="">
+          <img id="cheapOneImg" class="img-fluid mb-3" src="#" alt="">
           <h5 id="cheapOne">Margaret E.</h5>
           <p class="font-weight-light mb-0">Has successfully threw away 1000 disposable items properly</p>
         </div>
       </div>
       <div class="col-lg-4">
         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-          <img class="img-fluid rounded-circle mb-3" src="images/testimonials-2.jpg" alt="">
+          <img class="img-fluid mb-3" src="images/testimonials-2.jpg" alt="">
           <h5 id="expensiveTwo">Fred S.</h5>
           <p class="font-weight-light mb-0">Has successfully threw away 920 disposable items properly</p>
         </div>
@@ -102,7 +102,7 @@
     <% for (let sneaker of sneakers) { %>
           
     <section>
-    <p style="display: none;" class="data"><%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %> <%= sneaker.sneakerName %></p>
+    <p style="display: none;" class="data"><%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %> <%= sneaker.imageUrl %> <%= sneaker.sneakerName %></p>
     </section>
 
     <% } %>

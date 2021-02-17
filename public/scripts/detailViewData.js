@@ -3,8 +3,6 @@ let allData = [];
 let dataByReseller = [];
 let dataByDay = [];
 
-
-
 let barChartData = [];
 let barChartLabels = [];
 
@@ -28,6 +26,16 @@ const YEARS = ['2020', '2021'];
 let seenDates = []
 
 
+/**
+ * This functions goes through all the data that has been collected. It selects it
+ * by accessing text from paragraphs loaded as hidden in html. We select each paragraph
+ * (sneaker data) which we then turn its contents to a list of strings. The contents are
+ * price, name, release date, date the data was gotten etc. Because some of my data has 
+ * duplicates I created a list to track what we have seen before. We check if we have seen
+ * a duplicate by checking the date the data was obtained. Once it has been cleared we add
+ * it to a list `allData` as a dictionary. 
+ * @param none There are no parameters
+ */
 function getAllData(){
     // select each data section
     let dataParagraphs = document.querySelectorAll(".data");
@@ -43,7 +51,7 @@ function getAllData(){
         let stadium = parseInt(dataList[5]);
         let flight = parseInt(dataList[6]);
         // get the average of the prices (not including retail price)
-        let avg = (stockx+goat+stadium+flight)/4
+        // let avg = (stockx+goat+stadium+flight)/4
 
 
         // get the date 
@@ -70,6 +78,25 @@ function getAllData(){
         if (seenDates.includes(date)){
             num +=1;
         }else{
+
+            if (isNaN(stockx)){
+                stockx = 0;
+            }
+            
+            if (isNaN(goat)){
+                goat = 0;
+            }
+            
+            if (isNaN(flight)){
+                flight = 0;
+            }
+
+            if (isNaN(stadium)){
+                stadium = 0;
+            }
+
+            let avg = (stockx+goat+stadium+flight)/4
+
         // add a never seen date
         seenDates.push(date);
         // add dictionary of data to list
@@ -93,6 +120,11 @@ function getAllData(){
 }
 
 
+
+/**
+ * This functions goes through all the data that has been collected. It selects it
+ * @param none There are no parameters
+ */
 function getDataByReSeller(){
 
     for (let i = 0; i < allData.length;i++){
@@ -165,6 +197,11 @@ function getDataByReSeller(){
 }
 
 
+/**
+ * This functions draws a bar chart onto html by selecting a id and with the data
+ * collected in the function `getLabelsAndData`.
+ * @param none There are no parameters
+ */
 function drawBarChart(){
     var ctx = document.getElementById('barChart');
     ctx.height = 400;
@@ -212,6 +249,12 @@ function drawBarChart(){
 }
 
 
+
+/**
+ * This functions draws a line chart onto html by selecting a id and with the data
+ * collected in the function `getLabelsAndData`.
+ * @param none There are no parameters
+ */
 function drwaLineChart(){
     var linectx = document.getElementById('lineChart');
     linectx.height = 400;
@@ -278,21 +321,29 @@ function drwaLineChart(){
 }
 
 
+
+/**
+ * This functions goes through all the data that has been collected. It selects it
+ * @param none There are no parameters
+ */
 function getLabelsAndData(){
     // create labeles for barchart
-    barChartLabels.push("retail");
-    barChartLabels.push("goat");
-    barChartLabels.push("stockx");
-    barChartLabels.push("stadium");
-    barChartLabels.push("flight");
-    barChartLabels.push("average");
 
+    console.log(dataByReseller);
     // get barchartData
     for (let i = 0; i < dataByReseller.length; i++){
         // if price is nan 
-        barChartData.push(dataByReseller[i].price);
+        let price = dataByReseller[i].price;
+        let place = dataByReseller[i].place;
+        barChartLabels.push(place);
+        if (price === 0 || isNaN(price)){
+            barChartData.push(price)
+        }else {
+            barChartData.push(price);
+        }
     }
 
+    
     // get linechartData
     for (let i = 0; i < allData.length; i++){
         averageLineChartLabels.push(allData[i].date);
@@ -312,13 +363,6 @@ function getLabelsAndData(){
     }
 
 }
-
-// this has goat and stockx mixed up
-// console.log(barChartData);
-
-// this 
-// console.log(dataByReseller)
-
 
 
 getAllData();
