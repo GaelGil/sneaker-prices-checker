@@ -20,15 +20,13 @@
 <!-- for getting data -->
 <div class="blog_section">
     <% for (let sneaker of sneakers) { %>
-        <% if (snkr.styleID == sneaker.styleID) { %>
           
     <section>
     <p style="display: none;" class="data"> <%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %>  </p>
     </section>
             <% } %>
-
-    <% } %>
   </div>
+  
 <!-- end get data -->
 
 

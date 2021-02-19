@@ -112,7 +112,7 @@ function getAllUniqueData(){
  * that date we can return for use later.
  * @param none There are no parameters
  */
-function compareAndGetDate(){
+function getDate(){
 
     uniqueDates.sort(function(a,b) { 
         return new Date(a.start).getTime() - new Date(b.start).getTime() 
@@ -126,6 +126,8 @@ function compareAndGetDate(){
 
 function getTopBottomThree(today){
     let thisWeeksSneakers = []
+    let listOfExpensive = []
+    let listOfCheapest = []
 
     // get all the sneakers that were scraped last
     for (let i =0; i < uniqueData.length; i++){
@@ -134,7 +136,6 @@ function getTopBottomThree(today){
             thisWeeksSneakers.push(uniqueData[i]);
         }
     }
-
 
     // used to find highest and lowest prices
     let maxPrice = thisWeeksSneakers[0].average;
@@ -150,38 +151,31 @@ function getTopBottomThree(today){
         if (sneakerPrice > maxPrice){
             maxPrice = sneakerPrice;
             maxSneaker = sneaker;
+            listOfExpensive.push(sneaker)
         }
 
         if (sneakerPrice < minPrice){
             minPrice = sneakerPrice;
             minSneaker = sneaker;
+            listOfCheapest.push(sneaker);
         }
     }
 
+    listOfExpensive = listOfExpensive.slice(listOfExpensive.length-3, listOfExpensive.length)
 
-    return [maxSneaker, minSneaker]
+    listOfCheapest = listOfCheapest.slice(listOfCheapest.length-3, listOfCheapest.length)
+
+    return [listOfExpensive, listOfCheapest]
 }
 
-
-
-
-
-
-
-
-getAllUniqueData();
-let date = compareAndGetDate();
-let maxAndMin = getTopBottomThree(date);
-
-
- 
 
 /**
  * This functions selects the top 3 most expensive and bottom 3 cheapest
  * sneakers from a list and loads them into html to display on the page.
- * @param none There are no parameters
+ * @param expensiveAndCheap list that contains two lists inside with most
+ * expensive and cheapest sneakers
  */
-function loadSneakersToHtml(){
+function loadSneakersToHtml(expensiveAndCheap){
 
 
 
@@ -224,4 +218,12 @@ function loadSneakersToHtml(){
 }
 
 
-loadSneakersToHtml();
+getAllUniqueData();
+let date = getDate();
+let expensiveAndCheap = getTopBottomThree(date);
+loadSneakersToHtml(expensiveAndCheap);
+
+ 
+
+
+

@@ -2,7 +2,7 @@
 let allData = [];
 let dataByReseller = [];
 
-// data and labels
+// data and labels. This will be filled by getLabelsAndData and used by the draw functions
 let barChartData = [];
 let barChartLabels = [];
 
