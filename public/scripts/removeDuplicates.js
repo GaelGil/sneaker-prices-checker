@@ -175,41 +175,44 @@ function getTopBottomThree(today){
  * @param expensiveAndCheap list that contains two lists inside with most
  * expensive and cheapest sneakers
  */
-function loadSneakersToHtml(expensiveAndCheap){
+function loadSneakersToHtml(maxAndMin){
 
 
 
     window.onload = function(){
-        // var name = prompt("What's your name?");
-        // var lengthOfName = name.length
-    
-        // document.getElementById('output').innerHTML = lengthOfName;
+        let expensiveList = maxAndMin[0];
+        let cheapList = maxAndMin[1];
 
-        let maxShoe = maxAndMin[0].name;
-        let minShoe = maxAndMin[1].name;
+        console.log(expensiveList);
+        
+        // append expensive sneakers to html
+        document.getElementById('expensiveOneName').innerHTML = expensiveList[0].name;
+        document.getElementById('expensiveTwoName').innerHTML = expensiveList[1].name;
+        document.getElementById('expensiveThreeName').innerHTML = expensiveList[2].name;
+
+        $(`<img class="img-fluid mb-3" src="${expensiveList[2].img}">`).prependTo("#expensiveSneakerOne");
+        $(`<img class="img-fluid mb-3" src="${expensiveList[1].img}">`).prependTo("#expensiveSneakerTwo");
+        $(`<img class="img-fluid mb-3" src="${expensiveList[0].img}">`).prependTo("#expensiveSneakerThree");
+
+        $(`<p class="font-weight-light mb-0">Average Price: $${expensiveList[0].average} </p>`).appendTo("#expensiveSneakerOne");
+        $(`<p class="font-weight-light mb-0">Average Price: $${expensiveList[1].average} </p>`).appendTo("#expensiveSneakerTwo");
+        $(`<p class="font-weight-light mb-0">Average Price: $${expensiveList[2].average} </p>`).appendTo("#expensiveSneakerThree");
+        
 
 
-        document.getElementById('expensiveOneName').innerHTML = maxShoe;
+        // append cheap sneakers to html
+        document.getElementById('cheapOneName').innerHTML = cheapList[0].name;
+        document.getElementById('cheapTwoName').innerHTML = cheapList[1].name;
+        document.getElementById('cheapThreeName').innerHTML = cheapList[2].name;
 
-        let imgId = document.getElementById('expensiveOneImg');
-        let expensiveImg = new Image;
-        expensiveImg.onload = function() {
-            imgId.src = this.src;
-        }
-        expensiveImg.src = maxAndMin[0].img;
+        $(`<img class="img-fluid mb-3" src="${cheapList[0].img}">`).prependTo("#cheapSneakerOne");
+        $(`<img class="img-fluid mb-3" src="${cheapList[1].img}">`).prependTo("#cheapSneakerTwo");
+        $(`<img class="img-fluid mb-3" src="${cheapList[2].img}">`).prependTo("#cheapSneakerThree");
 
- 
+        $(`<p class="font-weight-light mb-0">Average Price: $${cheapList[0].average} </p>`).appendTo("#cheapSneakerOne");
+        $(`<p class="font-weight-light mb-0">Average Price: $${cheapList[1].average} </p>`).appendTo("#cheapSneakerTwo");
+        $(`<p class="font-weight-light mb-0">Average Price: $${cheapList[2].average} </p>`).appendTo("#cheapSneakerThree");
 
-        document.getElementById('cheapOne').innerHTML = minShoe;
-
-        let cheapImgId = document.getElementById('cheapOneImg');
-        let cheapImg = new Image;
-        cheapImg.onload = function() {
-            cheapImgId.src = this.src;
-        }
-        cheapImg.src = maxAndMin[1].img;
-
- 
 
     };
 
