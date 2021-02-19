@@ -1,7 +1,7 @@
 let uniqueData = [];
 let seenDataLists = [];
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const YEARS = ['2020', '2021'];
+const YEARS = ['2020', '2021']; 
 let topThreeCheapest = [];
 let topThreeExpensive = [];
 let uniqueDates = []
@@ -105,6 +105,13 @@ function getAllUniqueData(){
 }
 
 
+
+/**
+ * This function sorts the list of unique dates and returns the most recent. This will
+ * help us select the data for the last time we have the scraped data. Once we have 
+ * that date we can return for use later.
+ * @param none There are no parameters
+ */
 function compareAndGetDate(){
 
     uniqueDates.sort(function(a,b) { 
@@ -118,47 +125,41 @@ function compareAndGetDate(){
 
 
 function getTopBottomThree(today){
-    let todaysSneakers = [];
+    let thisWeeksSneakers = []
 
     // get all the sneakers that were scraped last
     for (let i =0; i < uniqueData.length; i++){
         let sneakerDate = uniqueData[i].date; 
         if (sneakerDate === today){
-            todaysSneakers.push(uniqueData[i]);
+            thisWeeksSneakers.push(uniqueData[i]);
         }
     }
 
-    console.log(todaysSneakers.average);
 
     // used to find highest and lowest prices
-    let maxPrice = todaysSneakers[0].average;
-    let minPrice = todaysSneakers[0].average;
+    let maxPrice = thisWeeksSneakers[0].average;
+    let maxSneaker = thisWeeksSneakers[0];
+    let minPrice = thisWeeksSneakers[0].average;
+    let minSneaker = thisWeeksSneakers[0];
 
-    let maxInDollars = todaysSneakers[0].average;
-    for (let i =0; i < todaysSneakers.length; i++){
-        let price = todaysSneakers[i].average;
-        if (price > maxInDollars){
-            maxInDollars = price;
-        }
-    }
+    // get lowest and highest sneaker price 
+    for (let i = 0; i < thisWeeksSneakers.length; i++){
+        let sneakerPrice = thisWeeksSneakers[i].average; // get sneaker price
+        let sneaker = thisWeeksSneakers[i]; // get sneaker data 
 
-    console.log(maxInDollars);
-
-    for (let i = 0; i < todaysSneakers.length; i++){
-        // get lowest and highest sneaker price 
-        let sneakerPrice = todaysSneakers[i].average; // get sneaker price
-        // console.log(sneakerPrice + " " + maxPrice)
         if (sneakerPrice > maxPrice){
-            maxPrice = todaysSneakers[i]
+            maxPrice = sneakerPrice;
+            maxSneaker = sneaker;
         }
 
         if (sneakerPrice < minPrice){
-            minPrice = todaysSneakers[i]
+            minPrice = sneakerPrice;
+            minSneaker = sneaker;
         }
     }
 
 
-    return [maxPrice, minPrice]
+    return [maxSneaker, minSneaker]
 }
 
 

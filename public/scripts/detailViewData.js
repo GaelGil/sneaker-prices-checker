@@ -1,8 +1,8 @@
-
+//  all data and data today
 let allData = [];
 let dataByReseller = [];
-let dataByDay = [];
 
+// data and labels
 let barChartData = [];
 let barChartLabels = [];
 
@@ -21,6 +21,7 @@ let stadiumLineChartData = []
 let flightineChartLabels = []
 let flightLineChartData = []
 
+// checking stuff
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const YEARS = ['2020', '2021'];
 let seenDates = []
@@ -118,7 +119,6 @@ function getAllData(){
 
     return 0;
 }
-
 
 
 /**
@@ -249,7 +249,6 @@ function drawBarChart(){
 }
 
 
-
 /**
  * This functions draws a line chart onto html by selecting a id and with the data
  * collected in the function `getLabelsAndData`.
@@ -319,7 +318,6 @@ function drwaLineChart(){
     });
     return 0;
 }
-
 
 
 /**
