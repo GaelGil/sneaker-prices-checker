@@ -1,10 +1,9 @@
-let uniqueData = [];
-let seenDataLists = [];
+let uniqueData = []; 
+let uniqueDates = []
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const YEARS = ['2020', '2021']; 
 let topThreeCheapest = [];
 let topThreeExpensive = [];
-let uniqueDates = []
 
 
 /**
@@ -19,6 +18,7 @@ let uniqueDates = []
  */
 function getAllUniqueData(){
     let num = 0;
+    let seenDataLists = [];
     // select all the hidden paragraphs
     let dataParagraphs = document.querySelectorAll(".data");
     for (let i =0; i < dataParagraphs.length; i++){
@@ -124,6 +124,16 @@ function getDate(){
 }
 
 
+
+/**
+ * This function creates a list of sneakers with the same date as the parameter date. From 
+ * that list we can now get the most expensive and cheapest sneakers from that date. We do
+ * by going using a simple algorithm to find the max and the min while also appending what
+ * we see to a list of expensive or cheap sneakers. In the end this will leave us with a 
+ * list where the most expensive and cheapest are at the end of the list.
+ * @param {string} today This function takes in a string (date mm/dd/yyyy) as its paramter 
+ * @return {list} This list contains 2 lists inside of them where each list has 3 sneakers in it
+ */
 function getTopBottomThree(today){
     let thisWeeksSneakers = []
     let listOfExpensive = []
@@ -139,9 +149,7 @@ function getTopBottomThree(today){
 
     // used to find highest and lowest prices
     let maxPrice = thisWeeksSneakers[0].average;
-    let maxSneaker = thisWeeksSneakers[0];
     let minPrice = thisWeeksSneakers[0].average;
-    let minSneaker = thisWeeksSneakers[0];
 
     // get lowest and highest sneaker price 
     for (let i = 0; i < thisWeeksSneakers.length; i++){
@@ -150,13 +158,11 @@ function getTopBottomThree(today){
 
         if (sneakerPrice > maxPrice){
             maxPrice = sneakerPrice;
-            maxSneaker = sneaker;
             listOfExpensive.push(sneaker)
         }
 
         if (sneakerPrice < minPrice){
             minPrice = sneakerPrice;
-            minSneaker = sneaker;
             listOfCheapest.push(sneaker);
         }
     }
@@ -173,7 +179,7 @@ function getTopBottomThree(today){
  * This functions selects the top 3 most expensive and bottom 3 cheapest
  * sneakers from a list and loads them into html to display on the page.
  * @param expensiveAndCheap list that contains two lists inside with most
- * expensive and cheapest sneakers
+ *        expensive and cheapest sneakers
  */
 function loadSneakersToHtml(maxAndMin){
 
@@ -190,9 +196,9 @@ function loadSneakersToHtml(maxAndMin){
         document.getElementById('expensiveTwoName').innerHTML = expensiveList[1].name;
         document.getElementById('expensiveThreeName').innerHTML = expensiveList[2].name;
 
-        $(`<img class="img-fluid mb-3" src="${expensiveList[2].img}">`).prependTo("#expensiveSneakerOne");
+        $(`<img class="img-fluid mb-3" src="${expensiveList[0].img}">`).prependTo("#expensiveSneakerOne");
         $(`<img class="img-fluid mb-3" src="${expensiveList[1].img}">`).prependTo("#expensiveSneakerTwo");
-        $(`<img class="img-fluid mb-3" src="${expensiveList[0].img}">`).prependTo("#expensiveSneakerThree");
+        $(`<img class="img-fluid mb-3" src="${expensiveList[2].img}">`).prependTo("#expensiveSneakerThree");
 
         $(`<p class="font-weight-light mb-0">Average Price: $${expensiveList[0].average} </p>`).appendTo("#expensiveSneakerOne");
         $(`<p class="font-weight-light mb-0">Average Price: $${expensiveList[1].average} </p>`).appendTo("#expensiveSneakerTwo");
@@ -221,12 +227,16 @@ function loadSneakersToHtml(maxAndMin){
 }
 
 
-getAllUniqueData();
-let date = getDate();
-let expensiveAndCheap = getTopBottomThree(date);
-loadSneakersToHtml(expensiveAndCheap);
+
+function assembleSite(){
+    getAllUniqueData();
+    let date = getDate();
+    let expensiveAndCheap = getTopBottomThree(date);
+    loadSneakersToHtml(expensiveAndCheap);
+}
+
 
  
 
-
+assembleSite();
 

@@ -20,12 +20,10 @@ const models = require('../models');
 //Grabs all sneakers from the Sneakers database
 router.get('/:id/detail', function(req, res){
   models.Sneakers.findByPk(req.params.id).then(function(snkr){
-    models.Sneakers.findAll({ where: { sneakerName: snkr.sneakerName } }).then(function(sneakers){
       res.render('sneakers/detail', {
       sneakers: sneakers,
       snkr: snkr
      });
-  });
 });
 });
   

@@ -4,16 +4,82 @@
 
 <br>
 <br>
-<div class="container">
-    <h1><%= snkr.sneakerName %> </h1>
-    <img style="width:18rem;" src="<%= snkr.imageUrl %>">
-    <canvas style="float:right;" id="barChart" width="200" height="200"></canvas>
-    <canvas style="float:right;" id="lineChart" width="200" height="200"></canvas>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+<!-- whole info container -->
+<div style="width: 80%;"class="container">
+  <!-- sneaker info div -->
+  <div style="width: 100%; background-color: red;" class="sneakerInfo">
+    <!-- name and img div -->
+    <div style="float: left" class="nameAndImg">
+      <h3 style="color: black;"><%= snkr.sneakerName %> <h3>
+        <img style="width:18rem;" src="<%= snkr.imageUrl %>">
+    </div>
+    <!-- other info div -->
+    <div style="float:right; padding: 50px;" class="otherInfo">
+      <ul>
+        <li>ReleaseDate: <%= snkr.releaseDate %></li>
+        <li>Retail Price: $<%= snkr.retailPrice %></li>
+        <li>stockXPrice Price: $<%= snkr.retailPrice %></li>
+        <li>goatPrice: $<%= snkr.retailPrice %></li>
+        <li>stadiumGoodsPrice: $<%= snkr.retailPrice %></li>
+        <li>flightClubPrice: $<%= snkr.retailPrice %></li>
+        <li>silhoutte: <%= snkr.silhoutte %></li>
+        <li>styleID: <%= snkr.styleID %></li>
+     </ul>
+    </div>
+  </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- div for line graph -->
+    <div style="width: 100%; background-color: red;" class="lineGraphSection">
+      <h6 style="float:left; color: black;width: 50%;"> 
+        This grpah here shows the data as time goes by. I first started getting 
+        data everyday but then I realised that prices don't change much. Now I 
+        scrape by the week. If data is missing for one sneaker site itll be 
+        marked as zero.
+      </h6>
+      <canvas style="float:right;" id="lineChart" width="200" height="200"></canvas>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- div for bargraph  -->
+    <div style="width: 100%; background-color: blue;" class="barGraphData">
+      <h6 style="float:left; color: black;width: 50%;"> 
+        This grpah here shows the prices of the week at each resell site. This can also be found
+        at the top of the site but here it is graphed.
+      </h6>
+      <canvas style="float:right;" id="barChart" width="200" height="200"></canvas>
+    </div>
 </div>
 
 
