@@ -2,9 +2,9 @@ let uniqueData = [];
 let uniqueDates = []
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const YEARS = ['2020', '2021']; 
+const BRANDS = ['Nike', 'Jordan', 'Yeezy', 'adidas', ''];
 let topThreeCheapest = [];
 let topThreeExpensive = [];
-
 
 /**
  * This functions goes through all the data that has been collected. It selects it
@@ -228,12 +228,24 @@ function loadSneakersToHtml(maxAndMin){
 
 
 
+/**
+ * This functions will go through all the data and try and add a brand to a 
+ * sneaker by searching through each sneakers name.
+ * @param data A list of all the unique sneaker data
+ */
+function getBrand(data){
+    return 0;
+}
+
+
+
 function assembleSite(){
     getAllUniqueData();
     let date = getDate();
     let expensiveAndCheap = getTopBottomThree(date);
     loadSneakersToHtml(expensiveAndCheap);
 }
+
 
 
  

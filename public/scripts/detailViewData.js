@@ -215,20 +215,20 @@ function drawBarChart(){
                 label: 'price in US dollars',
                 data: barChartData,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 192, 203, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)',
                     'rgba(75, 192, 192, 0.2)',
                     'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 192, 203, 0.2)'
+                    'rgba(255, 99, 132, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 192, 203, 1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',
                     'rgba(153, 102, 255, 1)',
-                    'rgba(255, 192, 203, 1)'
+                    'rgba(255, 99, 132, 1)'
                 ],
                 borderWidth: 1
             }]
@@ -266,24 +266,24 @@ function drwaLineChart(){
                 label: 'Average',
                 fill: false,
                 data: averageLineChartData,
-                backgroundColor: 'rgba(255, 192, 203)',
-                borderColor: 'rgba(255, 192, 203)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
             },
             {
                 label: 'StockX',
                 fill: false,
                 data: stockxLineChartData,
-                backgroundColor:'rgba(255, 206, 86, 0.2)',
-                borderColor: 'rgba(255, 206, 86, 0.2)',
+                backgroundColor:'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             },
             {
                 label: 'Goat',
                 fill: false,
                 data: goatLineChartData,
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 0.2)',
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
                 borderWidth: 1
             },
             {
@@ -291,14 +291,14 @@ function drwaLineChart(){
                 fill: false,
                 data: stadiumLineChartData,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             },
             {
                 label: 'FlightCLub',
                 fill: false,
                 data: flightLineChartData,
-                backgroundColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
                 borderColor: 'rgba(153, 102, 255, 1)',
                 borderWidth: 1
             },
@@ -327,7 +327,6 @@ function drwaLineChart(){
 function getLabelsAndData(){
     // create labeles for barchart
 
-    console.log(dataByReseller);
     // get barchartData
     for (let i = 0; i < dataByReseller.length; i++){
         // if price is nan 
@@ -361,6 +360,10 @@ function getLabelsAndData(){
     }
 
 }
+
+console.log(barChartLabels);
+console.log(barChartData);
+console.log(dataByReseller)
 
 
 getAllData();
