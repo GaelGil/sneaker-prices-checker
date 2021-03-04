@@ -185,11 +185,11 @@ function loadSneakersToHtml(maxAndMin){
 
 
 
-    window.onload = function(){
+    $(document).ready(function () {
         let expensiveList = maxAndMin[0];
         let cheapList = maxAndMin[1];
 
-        console.log(expensiveList);
+        // console.log(expensiveList);
         
         // append expensive sneakers to html
         document.getElementById('expensiveOneName').innerHTML = expensiveList[0].name;
@@ -220,8 +220,7 @@ function loadSneakersToHtml(maxAndMin){
         $(`<p class="font-weight-light mb-0">Average Price: $${cheapList[2].average} </p>`).appendTo("#cheapSneakerThree");
 
 
-    };
-
+    });
 
     return 0;
 }
