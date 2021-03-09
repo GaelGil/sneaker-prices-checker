@@ -3,6 +3,10 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../models');
+// const db = express.Db();
+const Sequelize = require('sequelize');
+const { sequelize } = require('../models');
+
 
     
 //Grabs all sneakers from the Sneakers database
@@ -23,7 +27,9 @@ router.get('/:id/detail', function(req, res){
     models.Sneakers.findAll({ where: { sneakerName: snkr.sneakerName } }).then(function(sneakers){
       res.render('sneakers/detail', {
       sneakers: sneakers,
-      snkr: snkr
+      snkr: snkr,
+
+      // otherStuff: {sneakers.goatPrice}
      });
   });
 });
@@ -34,14 +40,21 @@ router.get('/:id/detail', function(req, res){
 
 //Grabs all sneakers from the Sneakers database
 router.get('/vis', function(req, res){
-  // models.Sneakers.findAll({   where: {'goatPrice': models.Sneakers.max('goatPrice')} } ).then(function(maxSnkrs){
+  models.Sneakers.findAll({ 
+
+    order:[[ Sequelize.fn('min', Sequelize.col('stockXPrice')), 'DESC']],
+    // // order: sequelize.fn('min', sequelize.col('stockXPrice')),
+    group: ['id'],
+    raw: true,
+    omitNull: true,
+  } ).then(function(maxSnkrs){
   models.Sneakers.findAll().then(function(sneakers){
     res.render('sneakers/visuals', {
     sneakers: sneakers,
-    // maxSnkrs: maxSnkrs
+    maxSnkrs: JSON.stringify(maxSnkrs)
     });
   });
-// });
+});
 });
 
 

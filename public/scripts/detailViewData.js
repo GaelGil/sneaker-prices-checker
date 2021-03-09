@@ -361,10 +361,6 @@ function getLabelsAndData(){
 
 }
 
-console.log(barChartLabels);
-console.log(barChartData);
-console.log(dataByReseller)
-
 
 getAllData();
 getDataByReSeller();

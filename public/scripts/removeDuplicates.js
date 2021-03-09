@@ -60,6 +60,7 @@ function getAllUniqueData(){
         let date = month + "/" + day + "/" + year
         
 
+
         if (seenDataLists.includes(data)){
             num +=1;
         }else{
