@@ -28,20 +28,7 @@
     </div>
   </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
     <!-- div for line graph -->
     <div style="width: 100%; background-color: red;" class="lineGraphSection">
       <h6 style="float:left; color: black;width: 50%;"> 
@@ -51,27 +38,8 @@
         marked as zero.
       </h6>
       <canvas style="float:right;" id="lineChart" width="200" height="200"></canvas>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
+      
     <!-- div for bargraph  -->
     <div style="width: 100%; background-color: blue;" class="barGraphData">
       <h6 style="float:left; color: black;width: 50%;"> 
@@ -82,18 +50,15 @@
     </div>
 </div>
 
+<!-- access data given by the sneaks api -->
+<p class="apiData" style="display: none;"> <%= apiData %> </p>
+
 
 <!-- for getting data -->
-<div class="blog_section">
-    <% for (let sneaker of sneakers) { %>
-          
-    <section>
-    <p style="display: none;" class="data"> <%= sneaker.releaseDate %> <%= sneaker.retailPrice %> <%= sneaker.stockXPrice %> <%= sneaker.goatPrice %> <%= sneaker.stadiumGoodsPrice %> <%= sneaker.flightClubPrice %> <%= sneaker.createdAt %>  </p>
-    </section>
-            <% } %>
-  </div>
-  
+
+<p class="modelData" style="display: none;"> <%= sneakers %> </p>
+
 <!-- end get data -->
 
 
-<script type="text/javascript" src="/scripts/detailViewData.js"></script>
+<script type="text/javascript" src="/scripts/detail.js"></script>

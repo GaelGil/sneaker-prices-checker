@@ -123,6 +123,25 @@ function getAllData(){
 
 /**
  * This functions goes through all the data that has been collected. It selects it
+ * by accessing text from paragraphs loaded as hidden in html. We select each paragraph
+ * (sneaker data) which we then turn its contents to a list of strings. The contents are
+ * price, name, release date, date the data was gotten etc. Because some of my data has 
+ * duplicates I created a list to track what we have seen before. We check if we have seen
+ * a duplicate by checking the date the data was obtained. Once it has been cleared we add
+ * it to a list `allData` as a dictionary. 
+ * @param none There are no parameters
+ */
+function getApiData(){
+    let data = document.querySelectorAll(".apiData");
+    data = data[0].textContent;
+    data = JSON.parse(data)
+    console.log(Object.keys(data))
+
+}
+
+
+/**
+ * This functions goes through all the data that has been collected. It selects it
  * @param none There are no parameters
  */
 function getDataByReSeller(){
@@ -367,4 +386,9 @@ getDataByReSeller();
 getLabelsAndData();
 drawBarChart();
 drwaLineChart();
+getApiData();
 
+
+function handleSize(size){return 0}
+function getCheapestFromSites(size){return 0}
+function drawSizeBarChart(size, data){return 0}
