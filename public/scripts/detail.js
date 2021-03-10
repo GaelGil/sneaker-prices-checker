@@ -17,6 +17,7 @@ function getmodelData(){
     // turn that the data string into json format
     data = JSON.parse(data)
 
+    // for every sneaker record
     for (let i = 0; i < data.length; i++){
         sneaker = data[i];
 
@@ -33,7 +34,7 @@ function getmodelData(){
 
         if (isNaN(stockx)){
             stockx = 0;
-            // sneaker['stockXPrice'] = 0;
+            sneaker['stockXPrice'] = 0;
         }
         
         if (isNaN(goat)){
@@ -58,8 +59,24 @@ function getmodelData(){
         sneaker['date'] = date;
     }
 
-
     return data
+}
+
+
+/**
+ * This function takes checks the html and gets the data that was produced by the api.
+ * @param none There are no parameters
+ * @return list
+ */
+ function getApiData(){
+    let data = document.querySelectorAll(".apiData");
+    let usefulData = []
+    data = data[0].textContent;
+    data = JSON.parse(data)
+    // add prices and sizes and where to buy
+    usefulData.push(data.resellPrices, data.resellLinks)
+
+    return usefulData;
 }
 
 
@@ -92,22 +109,18 @@ function getmodelData(){
         "place": "stockx",
         "price": totalStockxPrice
         },
-
         {
         "place": "goat",
         "price": totalGoatPrice
         },
-
         {
         "place": "stadium",
         "price": totalStadiumPrice
         },
-
         {
         "place": "flight",
         "price": totalFlightPrice
         },
-        
         {
         "place": "average",
         "price": totalAveragePrice
@@ -117,28 +130,106 @@ function getmodelData(){
 
 }
 
-/**
- * This function takes checks the html adn gets the data that was produced by the api.
- * @param none There are no parameters
- * @return list
- */
-function getApiData(){
-    let data = document.querySelectorAll(".apiData");
-    let usefulData = []
-    data = data[0].textContent;
-    data = JSON.parse(data)
-    // add prices and sizes and where to buy
-    usefulData.push(data.resellPrices, data.resellLinks)
 
-    return usefulData;
+function getLabelsAndData(averagePrices, allData){
+    // get barchartData
+    let barChart = []
+    let barChartLabels = []
+    let barChartData = []
+
+    for (let i = 0; i < averagePrices.length; i++){
+        let price = averagePrices[i].price;
+        let site = averagePrices[i].place;
+        barChartLabels.push(site);
+        barChartData.push(price)
+      
+    }
+
+    barChart.push(barChartLabels, barChartData)
+
+    
+
+
+    return 0
 }
 
 
-function assembleSite (){
+function getPricesForSize(choosenSize, data){
+    // select the ressell prices dictionary
+    let sizeData = data[0];
+    let sizePrices = []
+
+    // find all the prices in each site and add to list
+    for (let site in sizeData) {
+        // check if the property/key is defined in the object itself, not in parent
+        if (choosenSize in sizeData[site]){
+        // add name of site and price with the choosen size
+        sizePrices.push([site, sizeData[site][choosenSize]])
+        }
+    }
+
+    return sizePrices;
+}
+
+/**
+ * This functions draws a bar chart onto html by selecting a id and with the data
+ * collected in the function `getLabelsAndData`.
+ * @param none There are no parameters
+ */
+ function drawBarChart(labels, data, chartLabel){
+    var ctx = document.getElementById('barChart');
+    ctx.height = 400;
+    ctx.width = 400;
+    
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: chartLabel,
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 192, 203, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 99, 132, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 192, 203, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 99, 132, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            // maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
     return 0;
 }
-let modelData = getmodelData()
-getAveragePriceReSeller(modelData)
 
-console.log(" ");
-getApiData()
+let modelData = getmodelData();
+let apiData = getApiData();
+let sitePrices = getAveragePriceReSeller(modelData);
+
+// getLabelsAndData(sitePrices, modelData)
+getPricesForSize(10, apiData)
+
+drawBarChart()
+
+
+

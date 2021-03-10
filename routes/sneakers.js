@@ -4,11 +4,8 @@ const express = require('express');
 const router = express.Router();
 const models = require('../models');
 // const db = express.Db();
-const Sequelize = require('sequelize');
 const SneaksAPI = require('sneaks-api');
-const { json } = require('sequelize');
 const sneaks = new SneaksAPI();
-// const { sequelize } = require('../models');
 
 
     
