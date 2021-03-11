@@ -4,11 +4,13 @@
 
 <!-- display all shoes here -->
 
+<br>
 
-<div class="container">
+<!-- <div class="container"> -->
+  <div class="column">
+
 <% for (let sneaker of sneakers) { %>
 
-     <!-- <div id="column"> -->
 
       <div class="card">
         <img src="<%= sneaker.imageUrl %>" class="card-img-top" alt="sneakerImage">
@@ -18,12 +20,13 @@
         </div>
       </div>
 
-      <br>
-      <br>
-    <!-- </div> -->
+      <!-- <br>
+      <br> -->
      <% } %>
+    </div>
 
-</div>
+
+<!-- </div> -->
 
 
  
