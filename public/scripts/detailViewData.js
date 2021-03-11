@@ -275,8 +275,8 @@ function drawBarChart(){
  */
 function drwaLineChart(){
     var linectx = document.getElementById('lineChart');
-    linectx.height = 400;
-    linectx.width = 400;
+    linectx.height = 80;
+    linectx.width = 80;
     var stackedLine = new Chart(linectx, {
         type: 'line',
         data: {

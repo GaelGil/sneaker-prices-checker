@@ -1,5 +1,3 @@
-
-
 /**
  * This function takes checks the html adn gets the data that was produced by the sneaker model.
  * The model is passed into the html as json. Here I grab the `p` tag and select the text and 
@@ -101,31 +99,13 @@ function getmodelData(){
     }
 
     averageDataByReseller.push(
-        {
-        "place": "retail",
-        "price": data[0].retailPrice,
-        },
-        {
-        "place": "stockx",
-        "price": totalStockxPrice
-        },
-        {
-        "place": "goat",
-        "price": totalGoatPrice
-        },
-        {
-        "place": "stadium",
-        "price": totalStadiumPrice
-        },
-        {
-        "place": "flight",
-        "price": totalFlightPrice
-        },
-        {
-        "place": "average",
-        "price": totalAveragePrice
-        })
-
+        ["retail", data[0].retailPrice],
+        ["stockx", totalStockxPrice],
+        ["goat",totalGoatPrice],
+        ["stadium",totalStadiumPrice],
+        ["flight", totalFlightPrice],
+        ["average",totalAveragePrice]
+        )
         return averageDataByReseller;
 
 }
@@ -134,26 +114,23 @@ function getmodelData(){
 function getLabelsAndData(averagePrices, allData){
     // get barchartData
     let barChart = []
-    let barChartLabels = []
-    let barChartData = []
-
-    for (let i = 0; i < averagePrices.length; i++){
-        let price = averagePrices[i].price;
-        let site = averagePrices[i].place;
-        barChartLabels.push(site);
-        barChartData.push(price)
-      
-    }
+    let barChartLabels = averagePrices.map(function(value,index) { return value[0]; });
+    let barChartData = averagePrices.map(function(value,index) { return value[1]; });
 
     barChart.push(barChartLabels, barChartData)
 
-    
-
-
-    return 0
+    return barChart;
 }
 
-
+/**
+ * This function takes in some integer (size) and some data. The data is a list where the 
+ * first element is a dictionary. The keys are websites and and the values are dictionaries
+ * containing the prices for each size. The function looks for the choosen size and returns 
+ * a list of prices. 
+ * @param int a sneaker size
+ * @param list a list containing sneaker size prices
+ * @return list
+ */
 function getPricesForSize(choosenSize, data){
     // select the ressell prices dictionary
     let sizeData = data[0];
@@ -176,10 +153,10 @@ function getPricesForSize(choosenSize, data){
  * collected in the function `getLabelsAndData`.
  * @param none There are no parameters
  */
- function drawBarChart(labels, data, chartLabel){
-    var ctx = document.getElementById('barChart');
+ function drawBarChart(labels, data, chartLabel, barClass){
+    var ctx = document.getElementById(barClass);
     ctx.height = 400;
-    ctx.width = 400;
+    ctx.width = 350;
     
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -222,14 +199,106 @@ function getPricesForSize(choosenSize, data){
     return 0;
 }
 
+
+function getLineChartInfo(data){
+    let priceByDay = {'stockx':[], 'goat':[], 'flight':[], 'stadium':[], 'avg': []}
+
+    for (let i = 0; i < data.length; i++){
+        let date = data[i]
+        priceByDay['stockx'].push([date.date, date.stockXPrice])
+        priceByDay['goat'].push([date.date, date.goatPrice])
+        priceByDay['flight'].push([date.date, date.flightClubPrice])
+        priceByDay['stadium'].push([date.date, date.stadiumGoodsPrice])
+        priceByDay['avg'].push([date.date, date.avg])
+    }
+    return priceByDay;
+}
+
+/**
+ * This functions draws a line chart onto html by selecting a id and with the data
+ * collected in the function `getLabelsAndData`.
+ * @param none There are no parameters
+ */
+ function drwaLineChart(data){
+    var linectx = document.getElementById('lineChart');
+    linectx.height = 400;
+    linectx.width = 350;
+    var stackedLine = new Chart(linectx, {
+        type: 'line',
+        data: {
+            labels: data['avg'].map(function(value,index) { return value[0]; }),
+            datasets: [{
+                label: 'Average',
+                fill: false,
+                data: data['avg'].map(function(value,index) { return value[1]; }),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'StockX',
+                fill: false,
+                data: data['stockx'].map(function(value,index) { return value[1]; }),
+                backgroundColor:'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Goat',
+                fill: false,
+                data: data['goat'].map(function(value,index) { return value[1]; }),
+                backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                borderColor: 'rgba(255, 206, 86, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'Stadium Goods',
+                fill: false,
+                data: data['stadium'].map(function(value,index) { return value[1]; }),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            },
+            {
+                label: 'FlightCLub',
+                fill: false,
+                data: data['flight'].map(function(value,index) { return value[1]; }),
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1
+            },
+        ]
+        },
+        options: {
+            responsive: false,
+            // maintainAspectRatio: true,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    return 0;
+}
+
 let modelData = getmodelData();
 let apiData = getApiData();
-let sitePrices = getAveragePriceReSeller(modelData);
+let siteAverages = getAveragePriceReSeller(modelData);
 
-// getLabelsAndData(sitePrices, modelData)
-getPricesForSize(10, apiData)
+let barChartData = getLabelsAndData(siteAverages, modelData)
 
-drawBarChart()
+let sizeData = getPricesForSize(10, apiData)
+let sizeSite = sizeData.map(function(value,index) { return value[0]; });
+let sizePrices = sizeData.map(function(value,index) { return value[1]; });
+
+
+let dataByDay = getLineChartInfo(modelData);
+drawBarChart(sizeSite, sizePrices, `size ${10} prices`,'sizePrices')
+drawBarChart(barChartData[0], barChartData[1], 'average prices by site', 'averageBySite')
+drwaLineChart(dataByDay)
 
 
 

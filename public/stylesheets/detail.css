@@ -1,3 +1,47 @@
 body {
     background-color: white;
 }
+
+p,h3 {
+    color:black
+}
+
+h3 {
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+.name h3 {
+    float:left;
+    width: 100%;
+}
+
+
+.img img {
+    height: 200px;
+    width: 200px;
+    display:block;
+    margin:auto;
+}
+
+.sneakerInfo{
+    margin:10px;
+}
+
+.infoHeader {
+    float:left;
+    width: 100%;
+}
+
+.infoHeader h3 {
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+
+.chart canvas {
+    /* width: 350px; */
+    /* height: 400px; */
+    display:block;
+    margin:auto;
+}
