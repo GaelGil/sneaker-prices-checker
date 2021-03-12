@@ -13,6 +13,7 @@ router.use('/libraries/bootstrap', express.static(path.join(__dirname, '../node_
 router.use('/libraries/cleave', express.static(path.join(__dirname, '../node_modules/cleave.js/dist')));
 router.use('/libraries/fontawesome', express.static(path.join(__dirname, '../node_modules/@fortawesome/fontawesome-free')));
 router.use('/libraries/jquery', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
+// router.use('/libraries/sneaks-api', express.static(path.join(__dirname, '../node_modules/sneaks-api')));
 
 
 router.use('/sneakers', require('./sneakers'));

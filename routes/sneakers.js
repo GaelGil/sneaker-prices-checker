@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const models = require('../models');
 // const db = express.Db();
-const SneaksAPI = require('sneaks-api');
+const SneaksAPI = require('../sneaks-api/controllers/sneaks.controllers.js');
 const sneaks = new SneaksAPI();
 
 
