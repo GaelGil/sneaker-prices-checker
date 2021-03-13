@@ -18,7 +18,6 @@ function getmodelData(){
     // for every sneaker record
     for (let i = 0; i < data.length; i++){
         sneaker = data[i];
-
         // get the date from `2020-12-23T22:11:35.463Z` to `12/23/2020`
         let date = new Date(sneaker.createdAt);
         date = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()

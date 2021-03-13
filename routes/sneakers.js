@@ -68,13 +68,17 @@ router.get('/search', function(req, res, next){
 
 
 router.get('/:id/more', function(req, res, next){
-  sneaks.getProductPrices(req.params.id, function(error, products){
+  sneaks.getProductPrices(req.params.id, function(error, product){
     res.render('sneakers/moreDetail', {
-      products:products,
+      apiData: JSON.stringify(product),
     })
   })
 });
 
 
-      
+router.get('/about', function(req, res, next){
+    res.render('sneakers/about', {
+    })
+});
+
 module.exports = router;

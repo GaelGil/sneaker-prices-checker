@@ -3,18 +3,39 @@
 
 
 
-<div class="searchedFor">
-    
-</div>
-
-    <img src="<%= products.thumbnail %>" class="card-img-top" alt="sneakerImage">
-        <h5 class="card-title"><%= products.shoeName %></h5>
-        <p><%= products.resellPrices %></p>
-        <p><%= products.resellLinks %></p>
 
 <div class="container">
 
 
+  <div class="sneakerInfo">
+    <!-- name and img div -->
+    <div class="name">
+      <h3><%= snkr.sneakerName %> <h3>
+      </div>
+      <div class="img">
+        <img style="width:18rem;" src="<%= snkr.imageUrl %>">
+    </div>
+    <!-- other info div -->
+    <div class="otherInfo">
+      <h3 class='infoHeader'>Sneaker Details</h3>
+      <ul>
+        <li>ReleaseDate: <%= snkr.releaseDate %></li>
+        <li>Retail Price: $<%= snkr.retailPrice %></li>
+        <li>stockXPrice Price: $<%= snkr.stockXPrice %></li>
+        <li>goatPrice: $<%= snkr.goatPrice %></li>
+        <li>stadiumGoodsPrice: $<%= snkr.stadiumGoodsPrice %></li>
+        <li>flightClubPrice: $<%= snkr.flightClubPrice%></li>
+        <li>silhoutte: <%= snkr.silhoutte %></li>
+        <li>styleID: <%= snkr.styleID %></li>
+     </ul>
+    </div>
+  </div>
+
  
 
   </div>
+
+  
+  <p class="apiData" style="display: none;"> <%= apiData %> </p>
+
+  <script type="text/javascript" src="/scripts/searchDetail.js"></script>

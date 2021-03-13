@@ -18,21 +18,14 @@
             <img src="<%= product.thumbnail %>" class="card-img-top" alt="sneakerImage">
               <div class="card-body">
                 <h5 class="card-title"><%= product.shoeName %></h5>
-                <p><%= product.lowestResellPrice %></p>
+                <p>StockX: $<%= product.lowestResellPrice.stockX %></p>
+                <p>Goat: $<%= product.lowestResellPrice.goat %></p>
                 <a href="/sneakers/<%= product.styleID %>/more" class="btn btn-dark">More</a>
             </div>
           </div>
-    
-          <!-- <br>
-          <br> -->
+          
           <% } %>
         </div>
     
 
 
-<div class="container">
-
-
- 
-
-  </div>
