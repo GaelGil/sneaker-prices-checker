@@ -1,6 +1,3 @@
-
-
-
 /**
  * This function takes checks the html and gets the data that was produced by the api.
  * @param none There are no parameters
@@ -12,98 +9,43 @@
     data = data[0].textContent;
     data = JSON.parse(data)
     // add prices and sizes and where to buy
-    usefulData.push(data.resellPrices, data.resellLinks)
-    console.log(data.thumbnail)
+    usefulData.push(data.resellPrices, data.resellLinks, [data.shoeName, data.thumbnail])
     return usefulData;
 }
 
 
+
 /**
- * This functions draws a bar chart onto html by selecting a id and with the data
- * collected in the function `getLabelsAndData`.
- * @param none There are no parameters
+ * This functions selects the top 3 most expensive and bottom 3 cheapest
+ * sneakers from a list and loads them into html to display on the page.
+ * @param expensiveAndCheap list that contains two lists inside with most
+ *        expensive and cheapest sneakers
  */
- function drawBarChart(labels, data, chartLabel, barClass){
-    var ctx = document.getElementById(barClass);
-    ctx.height = 400;
-    ctx.width = 350;
-    
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: chartLabel,
-                data: data,
-                backgroundColor: [
-                    'rgba(255, 192, 203, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 192, 203, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: false,
-            // maintainAspectRatio: true,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
+ function loadSneakersToHtml(data){
+    data = data[2]
+    let name = data[0];
+    let img = data[1];
+
+    html = `
+    <!-- name and img div -->
+    <div class="name">
+      <h3 class="sneakerName">${name} <h3>
+      </div>
+
+      <div class="img">
+        <img class="sneakerImg" style="width:18rem;" src="${img}">
+    </div>
+    `
+    $('.searchSneakerInfo').append(html)
+
+
     return 0;
 }
 
-/**
- * This function takes in some integer (size) and some data. The data is a list where the 
- * first element is a dictionary. The keys are websites and and the values are dictionaries
- * containing the prices for each size. The function looks for the choosen size and returns 
- * a list of prices. 
- * @param int a sneaker size
- * @param list a list containing sneaker size prices
- * @return list
- */
- function getPricesForSize(choosenSize, data){
-    // select the ressell prices dictionary
-    let sizeData = data[0];
-    let sizePrices = []
 
-    // find all the prices in each site and add to list
-    for (let site in sizeData) {
-        // check if the property/key is defined in the object itself, not in parent
-        if (choosenSize in sizeData[site]){
-        // add name of site and price with the choosen size
-        sizePrices.push([site, sizeData[site][choosenSize]])
-        }
-    }
+let data = getApiData();
 
-    return sizePrices;
-}
-
-let data = getApiData()
-console.log(data)
-
-let sizes = getPricesForSize(10, data)
-console.log(sizes)
-
-let sizeSite = sizes.map(function(value,index) { return value[0]; });
-let sizePrices = sizes.map(function(value,index) { return value[1]; });
+loadSneakersToHtml(data);
 
 
-drawBarChart(sizeSite, sizePrices, `size ${10} prices`,'sizePrices')
-drawBarChart(sizes)
+

@@ -61,23 +61,6 @@ function getmodelData(){
 
 
 /**
- * This function takes checks the html and gets the data that was produced by the api.
- * @param none There are no parameters
- * @return list
- */
- function getApiData(){
-    let data = document.querySelectorAll(".apiData");
-    let usefulData = []
-    data = data[0].textContent;
-    data = JSON.parse(data)
-    // add prices and sizes and where to buy
-    usefulData.push(data.resellPrices, data.resellLinks)
-
-    return usefulData;
-}
-
-
-/**
  * This functions goes through all the data that has been collected. It selects it
  * @param none There are no parameters
  */
@@ -90,12 +73,19 @@ function getmodelData(){
      let totalAveragePrice = 0;
     //  add up all the data
      for (let i = 0; i < data.length;i++){        
-        totalStockxPrice = data[i].stockXPrice;
-        totalGoatPrice = data[i].goatPrice;
-        totalStadiumPrice = data[i].stadiumGoodsPrice;
-        totalFlightPrice = data[i].flightClubPrice;
-        totalAveragePrice = data[i].avg;
+        totalStockxPrice += data[i].stockXPrice;
+        totalGoatPrice += data[i].goatPrice;
+        totalStadiumPrice += data[i].stadiumGoodsPrice;
+        totalFlightPrice += data[i].flightClubPrice;
+        totalAveragePrice += data[i].avg;
     }
+
+
+    totalStockxPrice = totalStockxPrice/data.length
+    totalGoatPrice = totalGoatPrice/data.length
+    totalStadiumPrice = totalStadiumPrice/data.length
+    totalFlightPrice = totalFlightPrice/data.length
+    totalAveragePrice = totalAveragePrice/data.length
 
     averageDataByReseller.push(
         ["retail", data[0].retailPrice],
@@ -110,6 +100,7 @@ function getmodelData(){
 }
 
 
+
 function getLabelsAndData(averagePrices, allData){
     // get barchartData
     let barChart = []
@@ -121,31 +112,6 @@ function getLabelsAndData(averagePrices, allData){
     return barChart;
 }
 
-/**
- * This function takes in some integer (size) and some data. The data is a list where the 
- * first element is a dictionary. The keys are websites and and the values are dictionaries
- * containing the prices for each size. The function looks for the choosen size and returns 
- * a list of prices. 
- * @param int a sneaker size
- * @param list a list containing sneaker size prices
- * @return list
- */
-function getPricesForSize(choosenSize, data){
-    // select the ressell prices dictionary
-    let sizeData = data[0];
-    let sizePrices = []
-
-    // find all the prices in each site and add to list
-    for (let site in sizeData) {
-        // check if the property/key is defined in the object itself, not in parent
-        if (choosenSize in sizeData[site]){
-        // add name of site and price with the choosen size
-        sizePrices.push([site, sizeData[site][choosenSize]])
-        }
-    }
-
-    return sizePrices;
-}
 
 /**
  * This functions draws a bar chart onto html by selecting a id and with the data
@@ -212,6 +178,7 @@ function getLineChartInfo(data){
     }
     return priceByDay;
 }
+
 
 /**
  * This functions draws a line chart onto html by selecting a id and with the data
@@ -283,19 +250,11 @@ function getLineChartInfo(data){
     return 0;
 }
 
+
 let modelData = getmodelData();
-let apiData = getApiData();
 let siteAverages = getAveragePriceReSeller(modelData);
-
 let barChartData = getLabelsAndData(siteAverages, modelData)
-
-let sizeData = getPricesForSize(10, apiData)
-let sizeSite = sizeData.map(function(value,index) { return value[0]; });
-let sizePrices = sizeData.map(function(value,index) { return value[1]; });
-
-
 let dataByDay = getLineChartInfo(modelData);
-drawBarChart(sizeSite, sizePrices, `size ${10} prices`,'sizePrices')
 drawBarChart(barChartData[0], barChartData[1], 'average prices by site', 'averageBySite')
 drwaLineChart(dataByDay)
 

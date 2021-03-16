@@ -10,11 +10,13 @@
   <!-- sneaker info div -->
   <div class="sneakerInfo">
     <!-- name and img div -->
+    <div class="nameAndImg">
     <div class="name">
       <h3><%= snkr.sneakerName %> <h3>
       </div>
       <div class="img">
         <img style="width:18rem;" src="<%= snkr.imageUrl %>">
+    </div>
     </div>
     <!-- other info div -->
     <div class="otherInfo">
@@ -32,24 +34,28 @@
     </div>
   </div>
 
+  <div class="form">
+    <div style="display: none;" class="htmlString"> 
+     <%= include('./includes/customSizeChart') %>
+    </div>
+  </div>
+
 
     <!-- div for line graph -->
-    <div>
-      <h3>Sneaker Prices by Week:</h3>
-      <canvas class="chart" id="lineChart"></canvas>
-    </div>
+    <div class="graphs">
+      <div class="priceTime">
+        <h3>Prices Through Time:</h3>
+        <canvas class="chart" id="lineChart"></canvas>
+      </div>
 
-      
     <!-- div for bargraph  -->
-    <div>
-      <h3>Average Prices by Site:</h3>
-      <canvas class="chart" id="averageBySite"></canvas>
-    </div>
+      <div class="averageSite">
+        <h3>Average Prices by Site:</h3>
+        <canvas class="chart" id="averageBySite"></canvas>
+      </div>
+    </div> 
 
-    <div>
-      <h3>Price of Sneaker at site:</h3>
-      <canvas class="chart" id="sizePrices"></canvas>
-    </div>
+
 
   </div>
 <!-- access data given by the sneaks api -->
@@ -63,3 +69,6 @@
 
 
 <script type="text/javascript" src="/scripts/detail.js"></script>
+<script type="text/javascript" src="/scripts/updateChart.js"></script>
+
+

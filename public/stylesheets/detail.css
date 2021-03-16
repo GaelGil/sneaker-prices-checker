@@ -28,6 +28,8 @@ h3 {
     margin:10px;
 }
 
+
+
 .infoHeader {
     float:left;
     width: 100%;
@@ -45,3 +47,56 @@ h3 {
     display:block;
     margin:auto;
 }
+
+/*for the big screens*/
+@media only screen and (min-width: 768px) {
+    body {
+        text-align: inherit;
+    }
+
+    .sneakerInfo {
+        display: inline-flex;
+        width: 100%;
+    }
+
+    .nameAndImg {
+        width: 50%;
+    }
+
+    .name h3 {
+        text-align: center;
+    }
+
+    .otherInfo{
+        width: 50%;
+    }
+    
+    .graphs {
+        margin-top: 50px;
+        display: inline-flex;
+        width: 100%;
+    }
+
+    .priceTime {
+        width: 50%;
+        text-align: center;
+    }
+    .averageSite {
+        width: 50%;
+        text-align: center;
+    }
+
+    .graphs canvas{
+        display:block;
+        margin:auto;
+    }
+    .customSize {
+        margin-top: 50px;
+        text-align: center;
+        display:block;
+        margin:auto;
+        width: 100%;
+    }
+
+  }
+  
