@@ -3,6 +3,8 @@
 const express = require('express');
 const path = require('path');
 const router = express.Router();
+const SneaksAPI = require('../sneaks-api/controllers/sneaks.controllers.js');
+const sneaks = new SneaksAPI();
 
 // configure serving any static file in public folder
 router.use(express.static(path.join(__dirname, '../public')));
@@ -22,8 +24,12 @@ router.use('/sneakers', require('./sneakers'));
 
 
 /// serve up the homepage
-router.get('/', function(req, res, next) {
-  res.render('index');
+sneaks.getProducts("Yeezy Cinder", function(err, products){
+  router.get('/', function(req, res, next) {
+    res.render('index', {
+      products: JSON.stringify(products),
+    });
+  })
 });
 
 module.exports = router;

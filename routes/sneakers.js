@@ -37,21 +37,6 @@ router.get('/:id/detail', function(req, res){
 });
 });
 });
-  
-  
-
-
-//Grabs all sneakers from the Sneakers database
-router.get('/vis', function(req, res){  
-  sneaks.getProducts('nike', function(error, products){
-    models.Sneakers.findAll().then(function(sneakers){
-      res.render('sneakers/visuals', {
-      sneakers: sneakers,
-      maxSnkrs: JSON.stringify(products),
-      });
-    });
-  })
-});
 
 
 // search using the api. then load data to html
@@ -62,6 +47,8 @@ router.get('/search', function(req, res, next){
         products: products
       })
     })
+  } else {
+    res.redirect('/sneakers/');
   }
 
 });

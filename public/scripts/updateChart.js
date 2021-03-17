@@ -92,6 +92,11 @@
         }
     }
 
+    if (sizePrices === undefined || sizePrices.length ===0){
+        alert(`could not find size ${choosenSize}`)
+        return 0;
+    }
+
     return sizePrices;
 }
 
@@ -103,6 +108,9 @@ function updateChart(defaultChart){
 
     data = getPricesForSize(size, sizeData)
 
+    if (data === 0){
+        return 0;
+    }
     // remove old graph
     customChart.data['labels'] = null;
     customChart.data['datasets'][0]['data'] = null;

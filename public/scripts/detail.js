@@ -100,7 +100,6 @@ function getmodelData(){
 }
 
 
-
 function getLabelsAndData(averagePrices, allData){
     // get barchartData
     let barChart = []

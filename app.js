@@ -4,6 +4,8 @@ const path = require('path');
 const cookieSession = require('cookie-session');
 const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
+const passport = require('passport');
+
 
 
 const routes = require('./routes');
@@ -14,8 +16,8 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 
-app.use(flash());
 
+app.use(flash());
 
 app.use(function(req, res, next) {
     next();
