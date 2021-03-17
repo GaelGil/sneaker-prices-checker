@@ -62,10 +62,10 @@ router.get('/:id/more', function(req, res, next){
   })
 });
 
-
-router.get('/about', function(req, res, next){
-    res.render('sneakers/about', {
-    })
-});
+// for now the about page takes you to the github repo
+// router.get('/about', function(req, res, next){
+//     res.render('sneakers/about', {
+//     })
+// });
 
 module.exports = router;
