@@ -22,9 +22,9 @@
  *        expensive and cheapest sneakers
  */
  function loadSneakersToHtml(data){
-    data = data[2]
-    let name = data[0];
-    let img = data[1];
+    // data = data[2]
+    let name = data[2][0];
+    let img = data[2][1];
 
     html = `
     <!-- name and img div -->
@@ -36,8 +36,10 @@
         <img class="sneakerImg" style="width:18rem;" src="${img}">
     </div>
     `
-    $('.searchSneakerInfo').append(html)
 
+
+
+      $('.searchSneakerInfo').append(html)
 
     return 0;
 }

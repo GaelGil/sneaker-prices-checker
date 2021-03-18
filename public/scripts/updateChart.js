@@ -133,6 +133,34 @@ function updateChart(defaultChart){
     return 0;
 }
 
+function addWhereToBuy(data){
+    let whereToBuy = `
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Where to Buy</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td><a target="_blank" rel="noopener noreferrer" href="${data[1].stockX}">stockX</a></td>
+            </tr>
+            <tr>
+            <td><a target="_blank" rel="noopener noreferrer" href="${data[1].goat}">goat</a></td>
+            </tr>
+            <tr>
+            <td><a target="_blank" rel="noopener noreferrer" href="${data[1].fligtClub}">fligthclub</a></td>
+            </tr>
+            <tr>
+            <td><a target="_blank" rel="noopener noreferrer" href="${data[1].stadiumGoods}">stadiumgoods</a></td>
+            </tr>
+        </tbody>
+    </table>`
+
+    $('.resellSites').append(whereToBuy)
+return 0;
+}
+
 function setDefaultChart(){
     // get api data
     let data = getData()
@@ -144,7 +172,7 @@ function setDefaultChart(){
     let sizePrices = sizes.map(function(value,index) { return value[1]; });
     // draw a chart
     let defualtChart = drawChart(sizeSite, sizePrices, `size 10 prices`,'sizePrices');
-
+    addWhereToBuy(data)
     return defualtChart;
 }
 

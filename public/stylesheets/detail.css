@@ -48,6 +48,10 @@ h3 {
     margin:auto;
 }
 
+.resellSites a {
+    color: black;
+}
+
 /*for the big screens*/
 @media only screen and (min-width: 768px) {
     body {
@@ -89,6 +93,7 @@ h3 {
     .graphs canvas{
         display:block;
         margin:auto;
+
     }
     .customSize {
         margin-top: 50px;
@@ -97,6 +102,17 @@ h3 {
         margin:auto;
         width: 100%;
     }
+
+    .sizeChart {
+        width: 50%;
+        float: left;
+    }
+
+    .resellSites {
+        width: 50%;
+        float: right;
+    }
+
 
   }
   
