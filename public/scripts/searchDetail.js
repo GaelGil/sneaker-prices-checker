@@ -6,11 +6,12 @@
  */
 function getApiData() {
   let data = document.querySelectorAll('.apiData');
-  const usefulData = [];
+  let usefulData = [];
   data = data[0].textContent;
   data = JSON.parse(data);
   // add prices and sizes and where to buy
   usefulData.push(data.resellPrices, data.resellLinks, [data.shoeName, data.thumbnail]);
+  console.log(usefulData);
   return usefulData;
 }
 
@@ -23,8 +24,8 @@ function getApiData() {
  */
 function loadSneakersToHtml(data) {
   // data = data[2]
-  const name = data[2][0];
-  const img = data[2][1];
+  let name = data[2][0];
+  let img = data[2][1];
 
   html = `
     <!-- name and img div -->
@@ -43,7 +44,7 @@ function loadSneakersToHtml(data) {
 }
 
 
-const data = getApiData();
+let data = getApiData();
 
 loadSneakersToHtml(data);
 

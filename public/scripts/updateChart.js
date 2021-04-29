@@ -5,11 +5,11 @@
  * @param none There are no parameters
  */
 function drawChart(labels, data, chartLabel, barClass) {
-  const chartClass = document.getElementById(barClass);
+  let chartClass = document.getElementById(barClass);
   chartClass.height = 400;
   chartClass.width = 350;
 
-  const myChart = new Chart(chartClass, {
+  let myChart = new Chart(chartClass, {
     type: 'bar',
     data: {
       labels: labels,
@@ -59,7 +59,7 @@ function drawChart(labels, data, chartLabel, barClass) {
 */
 function getData() {
   let data = document.querySelectorAll('.apiData');
-  const usefulData = [];
+  let usefulData = [];
   data = data[0].textContent;
   data = JSON.parse(data);
   // add prices and sizes and where to buy
@@ -74,17 +74,17 @@ function getData() {
 * first element is a dictionary. The keys are websites and and the values are dictionaries
 * containing the prices for each size. The function looks for the choosen size and returns
 * a list of prices.
-* @param int a sneaker size
-* @param list a list containing sneaker size prices
+* @param {int} choosenSize a sneaker size
+* @param {list} data a list containing sneaker size prices
 * @return list
 */
 function getPricesForSize(choosenSize, data) {
   // select the ressell prices dictionary
-  const sizeData = data[0];
-  const sizePrices = [];
+  let sizeData = data[0];
+  let sizePrices = [];
 
   // find all the prices in each site and add to list
-  for (const site in sizeData) {
+  for (let site in sizeData) {
     // check if the property/key is defined in the object itself, not in parent
     if (choosenSize in sizeData[site]) {
       // add name of site and price with the choosen size
@@ -101,9 +101,9 @@ function getPricesForSize(choosenSize, data) {
 
 
 function updateChart(defaultChart) {
-  const size = document.getElementById('size').value;
-  const sizeData = getData();
-  const customChart = defualtChart;
+  let size = document.getElementById('size').value;
+  let sizeData = getData();
+  let customChart = defualtChart;
   data = getPricesForSize(size, sizeData);
   if (data === 0) {
     return 0;
@@ -114,13 +114,13 @@ function updateChart(defaultChart) {
   customChart.data['datasets'][0]['label'] = null;
   customChart.update();
   // get labels and data
-  const sizeSite = data.map(function(value, index) {
+  let sizeSite = data.map(function(value, index) {
     return value[0];
   });
-  const dataset = data.map(function(value, index) {
+  let dataset = data.map(function(value, index) {
     return value[1];
   });
-  const label = `size ${size} prices`;
+  let label = `size ${size} prices`;
   // add user input
   customChart.data['labels'] = sizeSite;
   customChart.data['datasets'][0]['data'] = dataset;
@@ -132,7 +132,7 @@ function updateChart(defaultChart) {
 
 
 function addWhereToBuy(data) {
-  const whereToBuy = `
+  let whereToBuy = `
     <table class="table">
         <thead>
             <tr>
@@ -162,19 +162,19 @@ function addWhereToBuy(data) {
 
 function setDefaultChart() {
   // get api data
-  const data = getData();
+  let data = getData();
   // get size data
-  const sizes = getPricesForSize(10, data);
+  let sizes = getPricesForSize(10, data);
   // name of sites for labels
-  const sizeSite = sizes.map(function(value, index) {
+  let sizeSite = sizes.map(function(value, index) {
     return value[0];
   });
   // price of size
-  const sizePrices = sizes.map(function(value, index) {
+  let sizePrices = sizes.map(function(value, index) {
     return value[1];
   });
   // draw a chart
-  const defualtChart = drawChart(sizeSite, sizePrices, 'size 10 prices', 'sizePrices');
+  let defualtChart = drawChart(sizeSite, sizePrices, 'size 10 prices', 'sizePrices');
   addWhereToBuy(data);
 
   return defualtChart;
@@ -192,4 +192,4 @@ function toHtml() {
 
 
 toHtml();
-const defualtChart = setDefaultChart();
+let defualtChart = setDefaultChart();
