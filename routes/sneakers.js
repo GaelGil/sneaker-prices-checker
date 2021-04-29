@@ -8,6 +8,7 @@ const SneaksAPI = require('../sneaks-api/controllers/sneaks.controllers.js');
 const sneaks = new SneaksAPI();
 
 
+
     
 //Grabs all sneakers from the Sneakers database
   router.get('/', function(req, res){
