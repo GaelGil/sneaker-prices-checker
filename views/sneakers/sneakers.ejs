@@ -1,0 +1,24 @@
+<%- contentFor('title') %>
+<%- contentFor('body') %>
+
+
+
+<div class="searchedFor">
+</div>
+
+<div class="column">
+  <% if (products) { %>
+    <% for (let product of products) { %>
+      <div class="card">
+        <img src="<%= product.thumbnail %>" class="card-img-top" alt="sneakerImage">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.shoeName %></h5>
+            <a href="/sneakers/<%= product.styleID %>/detail" class="btn btn-dark">More</a>
+          </div>
+      </div>   
+    <% } %>
+</div>
+    
+<% } else if(products == undefined) { %>
+  <p>could not find sneakers</p>
+<% } %>
