@@ -1,9 +1,12 @@
-
 /**
- * This functions draws a bar chart onto html by selecting a id and with the
- * data collected in the function `getLabelsAndData`.
- * @param none There are no parameters
- */
+* This functions draws a bar chart onto html by selecting a id and with the
+* data collected in the function `getLabelsAndData`.
+* @param {list} labels a list of labels
+* @param {list} data a list of data
+* @param {list} chartLabel a list of labels for the chart
+* @param {list} barClass a list of class
+* @return {none}
+*/
 function drawChart(labels, data, chartLabel, barClass) {
   let chartClass = document.getElementById(barClass);
   chartClass.height = 400;
@@ -53,9 +56,10 @@ function drawChart(labels, data, chartLabel, barClass) {
 
 
 /**
-* This function takes checks the html and gets the data that was produced by the api.
-* @param none There are no parameters
-* @return list
+* This function takes checks the html and gets the data that was produced by the
+* api.
+* @param {none} none
+* @return {list}
 */
 function getData() {
   let data = document.querySelectorAll('.apiData');
@@ -70,15 +74,15 @@ function getData() {
 
 
 /**
-* This function takes in some integer (size) and some data. The data is a list where the
-* first element is a dictionary. The keys are websites and and the values are dictionaries
-* containing the prices for each size. The function looks for the choosen size and returns
-* a list of prices.
-* @param {int} choosenSize a sneaker size
+* This function takes in some integer (size) and some data. The data is a list
+* where the first element is a dictionary. The keys are websites and and the
+* values are dictionaries containing the prices for each size. The function
+* looks for the choosen size and returns a list of prices.
+* @param {int} size a sneaker size
 * @param {list} data a list containing sneaker size prices
-* @return list
+* @return {list}
 */
-function getPricesForSize(choosenSize, data) {
+function getPricesForSize(size, data) {
   // select the ressell prices dictionary
   let sizeData = data[0];
   let sizePrices = [];
@@ -86,13 +90,13 @@ function getPricesForSize(choosenSize, data) {
   // find all the prices in each site and add to list
   for (let site in sizeData) {
     // check if the property/key is defined in the object itself, not in parent
-    if (choosenSize in sizeData[site]) {
+    if (size in sizeData[site]) {
       // add name of site and price with the choosen size
-      sizePrices.push([site, sizeData[site][choosenSize]]);
+      sizePrices.push([site, sizeData[site][size]]);
     }
   }
   if (sizePrices === undefined || sizePrices.length ===0) {
-    alert(`could not find size ${choosenSize}`);
+    alert(`could not find size ${size}`);
     return 0;
   }
 
@@ -100,10 +104,18 @@ function getPricesForSize(choosenSize, data) {
 }
 
 
-function updateChart(defaultChart) {
+/**
+* This function takes in some integer (size) and some data. The data is a list
+* where the first element is a dictionary. The keys are websites and and the
+* values are dictionaries containing the prices for each size. The function
+* looks for the choosen size and returns a list of prices.
+* @param {int} defaultChart a sneaker size
+* @return {none}
+*/
+function updateChart() {
   let size = document.getElementById('size').value;
   let sizeData = getData();
-  let customChart = defualtChart;
+  let customChart = defaultChart;
   data = getPricesForSize(size, sizeData);
   if (data === 0) {
     return 0;
@@ -131,6 +143,14 @@ function updateChart(defaultChart) {
 }
 
 
+/**
+* This function takes in some integer (size) and some data. The data is a list
+* where the first element is a dictionary. The keys are websites and and the
+* values are dictionaries containing the prices for each size. The function
+* looks for the choosen size and returns a list of prices.
+* @param {list} data
+* @return {none}
+*/
 function addWhereToBuy(data) {
   let whereToBuy = `
     <table class="table">
@@ -160,6 +180,14 @@ function addWhereToBuy(data) {
 }
 
 
+/**
+* This function takes in some integer (size) and some data. The data is a list
+* where the first element is a dictionary. The keys are websites and and the
+* values are dictionaries containing the prices for each size. The function
+* looks for the choosen size and returns a list of prices.
+* @param {none} none
+* @return {none}
+*/
 function setDefaultChart() {
   // get api data
   let data = getData();
@@ -181,6 +209,14 @@ function setDefaultChart() {
 }
 
 
+/**
+* This function takes in some integer (size) and some data. The data is a list
+* where the first element is a dictionary. The keys are websites and and the
+* values are dictionaries containing the prices for each size. The function
+* looks for the choosen size and returns a list of prices.
+* @param {none} none
+* @return {none}
+*/
 function toHtml() {
   let html = document.querySelectorAll('.htmlString');
   // get the data that is in the paragraph
@@ -192,4 +228,4 @@ function toHtml() {
 
 
 toHtml();
-let defualtChart = setDefaultChart();
+let defaultChart = setDefaultChart();

@@ -1,9 +1,9 @@
 /**
- * This function takes checks the html and gets the data that was produced by
- * the api.
- * @param none There are no parameters
- * @return list
- */
+* This function takes checks the html and gets the data that was produced by
+* the api.
+* @param {none} none
+* @return {list}
+*/
 function getApiData() {
   let data = document.querySelectorAll('.apiData');
   let usefulData = [];
@@ -17,11 +17,12 @@ function getApiData() {
 
 
 /**
- * This functions selects the top 3 most expensive and bottom 3 cheapest
- * sneakers from a list and loads them into html to display on the page.
- * @param list data that contains two lists inside with most expensive
- * and cheapest sneakers
- */
+* This functions selects the top 3 most expensive and bottom 3 cheapest
+* sneakers from a list and loads them into html to display on the page.
+* @param {list} data that contains two lists inside with most expensive
+* and cheapest sneakers
+* @return {none}
+*/
 function loadSneakersToHtml(data) {
   // data = data[2]
   let name = data[2][0];
@@ -32,7 +33,6 @@ function loadSneakersToHtml(data) {
     <div class="name">
       <h3 class="sneakerName">${name} <h3>
       </div>
-
       <div class="img">
         <img class="sneakerImg" style="width:18rem;" src="${img}">
     </div>
@@ -47,4 +47,3 @@ function loadSneakersToHtml(data) {
 let data = getApiData();
 
 loadSneakersToHtml(data);
-
