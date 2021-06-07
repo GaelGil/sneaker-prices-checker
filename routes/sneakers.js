@@ -10,7 +10,7 @@ const sneaks = new SneaksAPI();
 router.get('/', function(req, res, next){  
   if (req.query.search) {
     sneaks.getProducts(req.query.search, function(error, products){
-      res.render('sneakers/search',{
+      res.render('sneakers/sneakers',{
         products: products
       })
     })
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next){
 //Grabs all sneakers from the Sneakers database
 router.get('/popular', function(req, res){
   sneaks.getMostPopular(function(err, products){
-    res.render('sneakers/popular', {
+    res.render('sneakers/sneakers', {
       products: products
     });
   });

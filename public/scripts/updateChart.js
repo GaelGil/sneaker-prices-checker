@@ -56,6 +56,72 @@ function drawChart(labels, data, chartLabel, barClass) {
 
 
 /**
+* This function takes in some integer (size) and some data. The data is a list
+* where the first element is a dictionary. The keys are websites and and the
+* values are dictionaries containing the prices for each size. The function
+* looks for the choosen size and returns a list of prices.
+* @param {none} none
+* @return {none}
+*/
+function setDefaultChart() {
+  let data = getData(); // get api data
+  let sizes = getPricesForSize(10, data); // get size data
+  // name of sites for labels
+  let sizeSite = sizes.map(function(value, index) {
+    return value[0];
+  });
+  // price of size
+  let sizePrices = sizes.map(function(value, index) {
+    return value[1];
+  });
+  // draw a chart
+  let defualtChart = drawChart(sizeSite, sizePrices, 'size 10 prices', 'sizePrices');
+  addWhereToBuy(data);
+
+  return defualtChart;
+}
+
+
+/**
+* This function takes in some integer (size) and some data. The data is a list
+* where the first element is a dictionary. The keys are websites and and the
+* values are dictionaries containing the prices for each size. The function
+* looks for the choosen size and returns a list of prices.
+* @param {int} defaultChart a sneaker size
+* @return {none}
+*/
+function updateChart() {
+  let size = document.getElementById('size').value;
+  let sizeData = getData();
+  let customChart = defaultChart;
+  data = getPricesForSize(size, sizeData);
+  if (data === 0) {
+    return 0;
+  }
+  // remove old graph
+  customChart.data['labels'] = null;
+  customChart.data['datasets'][0]['data'] = null;
+  customChart.data['datasets'][0]['label'] = null;
+  customChart.update();
+  // get labels and data
+  let sizeSite = data.map(function(value, index) {
+    return value[0];
+  });
+  let dataset = data.map(function(value, index) {
+    return value[1];
+  });
+  let label = `size ${size} prices`;
+  // add user input
+  customChart.data['labels'] = sizeSite;
+  customChart.data['datasets'][0]['data'] = dataset;
+  customChart.data['datasets'][0]['label'] = label;
+  customChart.update();
+
+  return 0;
+}
+
+
+/**
 * This function takes checks the html and gets the data that was produced by the
 * api.
 * @param {none} none
@@ -109,45 +175,6 @@ function getPricesForSize(size, data) {
 * where the first element is a dictionary. The keys are websites and and the
 * values are dictionaries containing the prices for each size. The function
 * looks for the choosen size and returns a list of prices.
-* @param {int} defaultChart a sneaker size
-* @return {none}
-*/
-function updateChart() {
-  let size = document.getElementById('size').value;
-  let sizeData = getData();
-  let customChart = defaultChart;
-  data = getPricesForSize(size, sizeData);
-  if (data === 0) {
-    return 0;
-  }
-  // remove old graph
-  customChart.data['labels'] = null;
-  customChart.data['datasets'][0]['data'] = null;
-  customChart.data['datasets'][0]['label'] = null;
-  customChart.update();
-  // get labels and data
-  let sizeSite = data.map(function(value, index) {
-    return value[0];
-  });
-  let dataset = data.map(function(value, index) {
-    return value[1];
-  });
-  let label = `size ${size} prices`;
-  // add user input
-  customChart.data['labels'] = sizeSite;
-  customChart.data['datasets'][0]['data'] = dataset;
-  customChart.data['datasets'][0]['label'] = label;
-  customChart.update();
-
-  return 0;
-}
-
-
-/**
-* This function takes in some integer (size) and some data. The data is a list
-* where the first element is a dictionary. The keys are websites and and the
-* values are dictionaries containing the prices for each size. The function
-* looks for the choosen size and returns a list of prices.
 * @param {list} data
 * @return {none}
 */
@@ -177,35 +204,6 @@ function addWhereToBuy(data) {
 
   $('.resellSites').append(whereToBuy);
   return 0;
-}
-
-
-/**
-* This function takes in some integer (size) and some data. The data is a list
-* where the first element is a dictionary. The keys are websites and and the
-* values are dictionaries containing the prices for each size. The function
-* looks for the choosen size and returns a list of prices.
-* @param {none} none
-* @return {none}
-*/
-function setDefaultChart() {
-  // get api data
-  let data = getData();
-  // get size data
-  let sizes = getPricesForSize(10, data);
-  // name of sites for labels
-  let sizeSite = sizes.map(function(value, index) {
-    return value[0];
-  });
-  // price of size
-  let sizePrices = sizes.map(function(value, index) {
-    return value[1];
-  });
-  // draw a chart
-  let defualtChart = drawChart(sizeSite, sizePrices, 'size 10 prices', 'sizePrices');
-  addWhereToBuy(data);
-
-  return defualtChart;
 }
 
 
