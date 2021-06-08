@@ -7,5 +7,4 @@ config
 webpack-stats.json
 .gcloudignore
 app.yaml
-*sneaks-api
 .eslintrc.js
